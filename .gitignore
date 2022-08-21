@@ -1,0 +1,14 @@
+# Editors
+.vscode/
+# Trash
+.DS_Store
+Thumbs.db
+# k8s
+kubeconfig
+# vscode-sops
+.decrypted~*.yaml
+
+TODO
+
+values.raw.yaml
+values.default.yaml
