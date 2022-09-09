@@ -21,6 +21,7 @@ spec:
             - -config.expand-env
             - -enable-features=integrations-next
             - -server.http.address=0.0.0.0:80
+            - -disable-reporting
           command:
             - /bin/agent
           env:
@@ -31,7 +32,7 @@ spec:
           envFrom:
             - secretRef:
                 name: grafana-agent
-          image: grafana/agent:v0.24.0
+          image: grafana/agent:v0.27.1
           imagePullPolicy: IfNotPresent
           name: grafana-agent
           ports:
