@@ -21,6 +21,7 @@ spec:
             - -config.expand-env
             - -enable-features=integrations-next
             - -server.http.address=0.0.0.0:80
+            - -disable-reporting
           command:
             - /bin/agent
           env:
