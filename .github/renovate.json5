@@ -30,6 +30,7 @@
       "datasourceTemplate": "helm"
     },
   ],
+  "labels": ["renovate"],
   "packageRules": [
     // setup datasources
     {
@@ -47,34 +48,28 @@
     },
     // add labels according to package and update types
     {
-      "matchDatasources": ["docker"],
-      "matchUpdateTypes": ["major"],
-      "labels": ["renovate/image", "dep/major"]
-    },
-    {
-      "matchDatasources": ["docker"],
-      "matchUpdateTypes": ["minor"],
-      "labels": ["renovate/image", "dep/minor"]
-    },
-    {
-      "matchDatasources": ["docker"],
       "matchUpdateTypes": ["patch"],
-      "labels": ["renovate/image", "dep/patch"]
+      "addLabels": ["patch"]
     },
     {
-      "matchDatasources": ["helm"],
-      "matchUpdateTypes": ["major"],
-      "labels": ["renovate/helm", "dep/major"]
-    },
-    {
-      "matchDatasources": ["helm"],
       "matchUpdateTypes": ["minor"],
-      "labels": ["renovate/helm", "dep/minor"]
+      "addLabels": ["minor"]
+    },
+    {
+      "matchUpdateTypes": ["major"],
+      "addLabels": ["major"]
+    },
+    {
+      "matchDatasources": ["docker"],
+      "addLabels": ["docker"]
     },
     {
       "matchDatasources": ["helm"],
-      "matchUpdateTypes": ["patch"],
-      "labels": ["renovate/helm", "dep/patch"]
+      "addLabels": ["helm"]
+    },
+    {
+      "matchDatasources": ["flux"],
+      "addLabels": ["flux"]
     }
   ]
 }
