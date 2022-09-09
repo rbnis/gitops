@@ -68,7 +68,7 @@
       "addLabels": ["helm"]
     },
     {
-      "matchDatasources": ["flux"],
+      "matchManagers": ["flux"],
       "addLabels": ["flux"]
     }
   ]
