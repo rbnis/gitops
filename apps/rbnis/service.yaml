@@ -1,0 +1,13 @@
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: rbnis
+  namespace: rbnis
+spec:
+  selector:
+    app: rbnis
+  ports:
+    - name: http
+      port: 80
+      targetPort: http

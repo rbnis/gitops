@@ -1,0 +1,15 @@
+---
+apiVersion: cert-manager.io/v1
+kind: Certificate
+metadata:
+  name: cert-rbnis
+  namespace: istio-ingress
+spec:
+  secretName: cert-rbnis
+  commonName: rbn.is
+  dnsNames:
+    - rbn.is
+    - "*.rbn.is"
+  issuerRef:
+    name: letsencrypt-production
+    kind: ClusterIssuer
