@@ -1,0 +1,44 @@
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: studibus-check
+  namespace: studibus-check
+  labels:
+    app: studibus-check
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: studibus-check
+  template:
+    metadata:
+      labels:
+        app: studibus-check
+    spec:
+      automountServiceAccountToken: false
+      imagePullSecrets:
+        - name: ghcr
+      containers:
+        - name: studibus-check
+          image: ghcr.io/rbnis/studibus-check:1.0.1
+          imagePullPolicy: IfNotPresent
+          envFrom:
+            - secretRef:
+                name: studibus-check
+          resources:
+            requests:
+              cpu: 25m
+              memory: 5Mi
+            limits:
+              cpu: 150m
+              memory: 20Mi
+          securityContext:
+            runAsUser: 101
+            runAsGroup: 101
+            fsGroup: 101
+      tolerations:
+        - key: "kubernetes.azure.com/scalesetpriority"
+          operator: "Equal"
+          value: "spot"
+          effect: "NoSchedule"
