@@ -17,3 +17,7 @@ spec:
         kind: HelmRepository
         name: istio
         namespace: flux-system
+  values:
+    global:
+      defaultPodDisruptionBudget:
+        enabled: false
