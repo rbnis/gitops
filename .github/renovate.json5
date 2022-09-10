@@ -15,6 +15,9 @@
       "^infrastructure/.+\\.ya?ml$",
     ],
   },
+  "pre-commit": {
+    "enabled": true
+  },
   "regexManagers": [
     // regexManager to read and process HelmReleases and CRDs
     {
@@ -32,21 +35,20 @@
   ],
   "labels": ["renovate"],
   "packageRules": [
-    // setup datasources
     {
       "matchDatasources": ["helm"],
       "separateMinorPatch": true,
-      "ignoreDeprecated": true
+      "ignoreDeprecated": true,
+      "addLabels": ["helm"]
     },
-    // global docker datasource settings
     {
       "matchDatasources": ["docker"],
       "enabled": true,
       "commitMessageTopic": "container image {{depName}}",
       "commitMessageExtra": "to {{#if isSingleVersion}}v{{{newVersion}}}{{else}}{{{newValue}}}{{/if}}",
       "matchUpdateTypes": ["major", "minor", "patch"],
+      "addLabels": ["docker"]
     },
-    // add labels according to package and update types
     {
       "matchUpdateTypes": ["patch"],
       "addLabels": ["patch"]
@@ -60,16 +62,12 @@
       "addLabels": ["major"]
     },
     {
-      "matchDatasources": ["docker"],
-      "addLabels": ["docker"]
-    },
-    {
-      "matchDatasources": ["helm"],
-      "addLabels": ["helm"]
-    },
-    {
       "matchManagers": ["flux"],
       "addLabels": ["flux"]
+    },
+    {
+      "matchManagers": ["pre-commit"],
+      "addLabels": ["pre-commit"]
     }
   ]
 }

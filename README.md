@@ -38,19 +38,11 @@ echo 'export SOPS_AGE_KEY_FILE="$HOME/.config/sops/age/keys.txt"' >> "$HOME/.zsh
 source "$HOME/.zshrc"
 ```
 
-4. Create a secret inthe cluster to decrypt secrets.
+4. Create a secret in the cluster to decrypt secrets.
 
 ```bash
+kubectl create namespace flux-system
 cat "$HOME/.config/sops/age/cluster.keys.txt" | kubectl create secret generic sops-age --namespace=flux-system --from-file=age.agekey=/dev/stdin
-```
-
-5. Add the secret to the kustomization for your repo.
-
-```bash
-echo "  decryption:
-    provider: sops
-    secretRef:
-      name: sops-age" >> "./clusters/${CLUSTER_NAME}/flux-system/gotk-sync.yaml"
 ```
 
 ### FluxCD
@@ -63,4 +55,11 @@ flux bootstrap github \
   --branch=main \
   --path=clusters/$CLUSTER_NAME \
   --personal
+```
+
+### Pre-Commit
+
+```sh
+pre-commit install-hooks
+pre-commit install
 ```
