@@ -5,4 +5,4 @@ metadata:
   name: cert-manager
 resources:
   # renovate: registryUrl=https://charts.jetstack.io chart=cert-manager
-  - https://github.com/cert-manager/cert-manager/releases/download/v1.9.1/cert-manager.crds.yaml
+  - https://github.com/cert-manager/cert-manager/releases/download/v1.10.0/cert-manager.crds.yaml
