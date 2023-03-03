@@ -8,7 +8,7 @@ metadata:
     app.kubernetes.io/name: rbnis
     track: canary
 spec:
-  replicas: 2
+  replicas: 1
   selector:
     matchLabels:
       app.kubernetes.io/name: rbnis
@@ -63,16 +63,3 @@ spec:
           operator: "Equal"
           value: "spot"
           effect: "NoSchedule"
----
-apiVersion: policy/v1
-kind: PodDisruptionBudget
-metadata:
-  name: rbnis
-  namespace: rbnis
-spec:
-  maxUnavailable: 50%
-  selector:
-    matchLabels:
-      app.kubernetes.io/name: rbnis
-      track: canary
-
