@@ -1,5 +1,5 @@
 ---
-apiVersion: networking.istio.io/v1alpha3
+apiVersion: networking.istio.io/v1beta1
 kind: Gateway
 metadata:
   name: rbnis
@@ -28,7 +28,7 @@ spec:
         mode: SIMPLE
         credentialName: cert-rbnis
 ---
-apiVersion: networking.istio.io/v1alpha3
+apiVersion: networking.istio.io/v1beta1
 kind: VirtualService
 metadata:
   name: rbnis
@@ -42,12 +42,33 @@ spec:
   http:
     - match:
         - authority:
+            exact: "canary.rbn.is"
+      route:
+        - destination:
+            host: rbnis.rbnis.svc.cluster.local
+            subset: canary
+    - match:
+        - authority:
             regex: ".*.rbn.is"
       redirect:
         authority: "rbn.is"
         redirectCode: 302
     - route:
         - destination:
-            host: rbnis
-            port:
-              number: 80
+            host: rbnis.rbnis.svc.cluster.local
+            subset: stable
+---
+apiVersion: networking.istio.io/v1beta1
+kind: DestinationRule
+metadata:
+  name: rbnis
+  namespace: rbnis
+spec:
+  host: rbnis
+  subsets:
+  - name: stable
+    labels:
+      track: stable
+  - name: canary
+    labels:
+      track: canary
