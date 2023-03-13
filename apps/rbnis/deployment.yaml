@@ -58,6 +58,10 @@ spec:
                       operator: In
                       values:
                         - rbnis
+                    - key: "track"
+                      operator: In
+                      values:
+                        - stable
       tolerations:
         - key: "kubernetes.azure.com/scalesetpriority"
           operator: "Equal"
