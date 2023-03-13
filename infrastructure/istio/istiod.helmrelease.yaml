@@ -19,8 +19,6 @@ spec:
         namespace: flux-system
   values:
     global:
-      defaultPodDisruptionBudget:
-        enabled: false
       logAsJson: true
     pilot:
       resources:
