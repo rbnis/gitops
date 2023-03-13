@@ -20,6 +20,9 @@ spec:
   values:
     global:
       logAsJson: true
+      proxy:
+        resources:
+          limits: null
     pilot:
       resources:
         requests:
