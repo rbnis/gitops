@@ -25,6 +25,11 @@ spec:
         patch:
           podAnnotations:
             sidecar.istio.io/inject: "false"
+      tolerations:
+        - key: "kubernetes.azure.com/scalesetpriority"
+          operator: "Equal"
+          value: "spot"
+          effect: "NoSchedule"
     prometheus:
       prometheusSpec:
         retention: 90d
@@ -50,3 +55,10 @@ spec:
           operator: "Equal"
           value: "spot"
           effect: "NoSchedule"
+    alertmanager:
+      alertmanagerSpec:
+        tolerations:
+          - key: "kubernetes.azure.com/scalesetpriority"
+            operator: "Equal"
+            value: "spot"
+            effect: "NoSchedule"
