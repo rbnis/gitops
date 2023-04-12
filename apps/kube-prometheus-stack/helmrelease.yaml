@@ -21,10 +21,12 @@ spec:
     crds: CreateReplace
   values:
     prometheusOperator:
+      # Disable istio sidecar injection for admission webhooks
       admissionWebhooks:
         patch:
           podAnnotations:
             sidecar.istio.io/inject: "false"
+      # Allow scheduling prometheusOperator on spot instances
       tolerations:
         - key: "kubernetes.azure.com/scalesetpriority"
           operator: "Equal"
@@ -50,6 +52,7 @@ spec:
         notifiers:
           enabled: true
           label: grafana_notifier
+      # Allow scheduling grafana on spot instances
       tolerations:
         - key: "kubernetes.azure.com/scalesetpriority"
           operator: "Equal"
@@ -57,8 +60,19 @@ spec:
           effect: "NoSchedule"
     alertmanager:
       alertmanagerSpec:
+        # Allow scheduling alertmanager on spot instances
         tolerations:
           - key: "kubernetes.azure.com/scalesetpriority"
             operator: "Equal"
             value: "spot"
             effect: "NoSchedule"
+    # Disable scraping of components inaccessable on AKS
+    defaultRules:
+      rules:
+        kubeControllerManager: false
+        kubeProxy: false
+        kubeSchedulerAlerting: false
+    kubeProxy:
+      enabled: false
+    kubeControllerManager:
+      enabled: false
