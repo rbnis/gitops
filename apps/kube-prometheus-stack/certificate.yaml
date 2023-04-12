@@ -1,0 +1,14 @@
+---
+apiVersion: cert-manager.io/v1
+kind: Certificate
+metadata:
+  name: cert-grafana
+  namespace: istio-ingress
+spec:
+  secretName: cert-grafana
+  commonName: grafana.${cluster_name}.rbn.is
+  dnsNames:
+    - grafana.${cluster_name}.rbn.is
+  issuerRef:
+    name: letsencrypt-production
+    kind: ClusterIssuer

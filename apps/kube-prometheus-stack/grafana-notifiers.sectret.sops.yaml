@@ -1,0 +1,40 @@
+apiVersion: v1
+kind: Secret
+metadata:
+    name: grafana-notifier-telegram-downtimebot
+    namespace: observability
+    labels:
+        grafana_notifier: "1"
+        app.kubernetes.io/name: grafana
+        app.kubernetes.io/component: config
+stringData:
+    notifiers.yaml: ENC[AES256_GCM,data:uimuPExgEj19ymw5PtvaR+1hBpFsr6sOrjPkStRVDeOnGUcQQ5moXIddsOFhNPaz8RDPFBoHAva8SnbnGLdBCI42aJxMUiU4xDFWy1p0+CCSiNFMe6PddfN6+hYXF7WwbBVLe2X4UCthShL/2HVFrtRQfjBwHNkFwUF7Lv2H8pFqcJYaI9E/bZt5djU7lI5+DExW+lEC+o9Ov0rqMYuJHQvMTAukC3VGeN5zWtQ34id+KOxdzfqE1jrcYp3gZK5K6rjMMqffAV2BKcpKxmVQAoAoH0Vqn14NzH7/T9m8hhy+nPKtUQmvr1LlDNKEu7dXng+Nyz7CqExO61T7a/0walbwQijGzATClrA1,iv:EEAtvjbStu+Y2iTKPGniku72wFSuRHv6/sojmv+OaUo=,tag:OBzLSDF2ck3hybOV6Jcexg==,type:str]
+sops:
+    kms: []
+    gcp_kms: []
+    azure_kv: []
+    hc_vault: []
+    age:
+        - recipient: age1c5e3523gtu22zh0qphsc0ug8ttdkpm8pcxwcrl5cck62lay2u4fqenpvfq
+          enc: |
+            -----BEGIN AGE ENCRYPTED FILE-----
+            YWdlLWVuY3J5cHRpb24ub3JnL3YxCi0+IFgyNTUxOSBvUTlJVmNNOVBQNW9icnZC
+            RDVsb0gzd3ErWDlyWDV6R1g4SlZlVVhybEJFClBBMWM3N29hMlZpMFVEcUZTMFZs
+            Z0l5S3NMdnVZVUR0RTJLdlpVZGNtYTgKLS0tIGZZQlArM2gwcCtraDUzbTNBZnpx
+            TG5nbFZuUWFJMldpZHZvbU5ZTjk0WDQK1LxYILebcPTifQxwpDOyTf2tSKvrB52E
+            HIqS2cDJXjdhZCREDDGfnTuKCvcoM/nORE6ZPt+H5NSbkndBLKwBnQ==
+            -----END AGE ENCRYPTED FILE-----
+        - recipient: age1vv0w9l4wam5aw2ns0x9tuwkzm942ajyq2setzy7pvpw3waev5qfsakd67a
+          enc: |
+            -----BEGIN AGE ENCRYPTED FILE-----
+            YWdlLWVuY3J5cHRpb24ub3JnL3YxCi0+IFgyNTUxOSB0SFJNaE01Mk51OVRhdW1R
+            QkFZS3JUNzJ6MkExZkNqNUY1Q3BWMTF1K2dNClpUOHBicmdEWmt5RmRYOGF5RlFq
+            ZjF3OTRzRW41Vlc4RkFkVndXY3dhTFUKLS0tIHY4QzhQZnNvV2pnSDZUQmJhSzdN
+            TU0rVWEwbTJiM3Z3ampVczdQY3VwbFUK/uv2lB+zRbEUWo6ElcsREZLIoTDZ+dtm
+            1Cw06d3k1d5RP1GZG+9+Rb/AMj+ImGIg8au+fc2/ynv2LNMfz8/yPg==
+            -----END AGE ENCRYPTED FILE-----
+    lastmodified: "2023-04-12T14:15:06Z"
+    mac: ENC[AES256_GCM,data:ZxpzQ8mtffoAtpVjzTPFmYt+1elj9wQqJzTKRAQoG27skrt0B4VK5AnOtoHpxI9ASbKOLjQU+k1T3MpT8+RCmQ/q/U3zdBvFjjyNehW19YwvfHDTo5RbxiojhW397VjcX09QjmYK9/dn6pVnzZb8ZXbfBEHKzkoWiieJ2f+8nzc=,iv:h/LgDD2RPEWDe6ZEgPgJaZawozh+YL8+MhneNGsr2Sk=,tag:vkDNf9rRxwXKkrxOZpTuLg==,type:str]
+    pgp: []
+    encrypted_regex: ^(data|stringData)$
+    version: 3.7.3

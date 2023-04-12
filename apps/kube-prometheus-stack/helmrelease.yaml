@@ -1,0 +1,47 @@
+---
+apiVersion: helm.toolkit.fluxcd.io/v2beta1
+kind: HelmRelease
+metadata:
+  name: kube-prometheus-stack
+  namespace: observability
+spec:
+  interval: 5m
+  chart:
+    spec:
+      # renovate: registryUrl=https://prometheus-community.github.io/helm-charts
+      chart: kube-prometheus-stack
+      version: 45.9.1
+      sourceRef:
+        kind: HelmRepository
+        name: prometheus-community
+        namespace: flux-system
+  install:
+    crds: Create
+  upgrade:
+    crds: CreateReplace
+  values:
+    prometheus:
+      prometheusSpec:
+        retention: 90d
+        storageSpec:
+          volumeClaimTemplate:
+            spec:
+              storageClassName: managed-csi
+              accessModes: ["ReadWriteOnce"]
+              resources:
+                requests:
+                  storage: 125Gi
+    grafana:
+      admin:
+        existingSecret: grafana-admin
+        userKey: username
+        passwordKey: password
+      sidecar:
+        notifiers:
+          enabled: true
+          label: grafana_notifier
+      tolerations:
+        - key: "kubernetes.azure.com/scalesetpriority"
+          operator: "Equal"
+          value: "spot"
+          effect: "NoSchedule"
