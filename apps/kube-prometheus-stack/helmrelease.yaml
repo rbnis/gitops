@@ -20,6 +20,11 @@ spec:
   upgrade:
     crds: CreateReplace
   values:
+    prometheusOperator:
+      admissionWebhooks:
+        patch:
+          podAnnotations:
+            sidecar.istio.io/inject: "false"
     prometheus:
       prometheusSpec:
         retention: 90d
