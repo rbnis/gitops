@@ -30,7 +30,7 @@ spec:
           envFrom:
             - secretRef:
                 name: grafana-agent
-          image: grafana/agent:v0.33.1
+          image: grafana/agent:v0.33.2
           imagePullPolicy: IfNotPresent
           name: grafana-agent-logs
           ports:
