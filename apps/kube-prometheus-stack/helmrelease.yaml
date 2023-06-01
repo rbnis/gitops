@@ -32,6 +32,19 @@ spec:
           operator: "Equal"
           value: "spot"
           effect: "NoSchedule"
+      resources:
+        requests:
+          cpu: 10m
+          memory: 128Mi
+        limits:
+          memory: 128Mi
+      prometheusConfigReloader:
+        resources:
+          requests:
+            cpu: 10m
+            memory: 50Mi
+          limits:
+            memory: 50Mi
     prometheus:
       prometheusSpec:
         retention: 90d
@@ -43,6 +56,12 @@ spec:
               resources:
                 requests:
                   storage: 125Gi
+        resources:
+          requests:
+            cpu: 150m
+            memory: 1536Mi
+          limits:
+            memory: 1536Mi
     grafana:
       admin:
         existingSecret: grafana-admin
@@ -52,12 +71,24 @@ spec:
         notifiers:
           enabled: true
           label: grafana_notifier
+        resources:
+          requests:
+            cpu: 10m
+            memory: 100Mi
+          limits:
+            memory: 100Mi
       # Allow scheduling grafana on spot instances
       tolerations:
         - key: "kubernetes.azure.com/scalesetpriority"
           operator: "Equal"
           value: "spot"
           effect: "NoSchedule"
+      resources:
+        requests:
+          cpu: 10m
+          memory: 150Mi
+        limits:
+          memory: 150Mi
     alertmanager:
       alertmanagerSpec:
         # Allow scheduling alertmanager on spot instances
@@ -66,6 +97,32 @@ spec:
             operator: "Equal"
             value: "spot"
             effect: "NoSchedule"
+        resources:
+          requests:
+            cpu: 10m
+            memory: 100Mi
+          limits:
+            memory: 100Mi
+    kube-state-metrics:
+      # Allow scheduling kube-state-metrics on spot instances
+      tolerations:
+        - key: "kubernetes.azure.com/scalesetpriority"
+          operator: "Equal"
+          value: "spot"
+          effect: "NoSchedule"
+      resources:
+        requests:
+          cpu: 10m
+          memory: 50Mi
+        limits:
+          memory: 50Mi
+    prometheus-node-exporter:
+      resources:
+        requests:
+          cpu: 10m
+          memory: 50Mi
+        limits:
+          memory: 50Mi
     # Disable scraping of components inaccessable on AKS
     defaultRules:
       rules:

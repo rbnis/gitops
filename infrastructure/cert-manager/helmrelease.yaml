@@ -25,18 +25,36 @@ spec:
         operator: "Equal"
         value: "spot"
         effect: "NoSchedule"
+    resources:
+      requests:
+        cpu: 10m
+        memory: 150Mi
+      limits:
+        memory: 150Mi
     webhook:
       tolerations:
         - key: "kubernetes.azure.com/scalesetpriority"
           operator: "Equal"
           value: "spot"
           effect: "NoSchedule"
+      resources:
+        requests:
+          cpu: 10m
+          memory: 50Mi
+        limits:
+          memory: 50Mi
     cainjector:
       tolerations:
         - key: "kubernetes.azure.com/scalesetpriority"
           operator: "Equal"
           value: "spot"
           effect: "NoSchedule"
+      resources:
+        requests:
+          cpu: 10m
+          memory: 200Mi
+        limits:
+          memory: 200Mi
     startupapicheck:
       tolerations:
         - key: "kubernetes.azure.com/scalesetpriority"
