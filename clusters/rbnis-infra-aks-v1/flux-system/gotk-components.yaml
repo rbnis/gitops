@@ -6434,7 +6434,6 @@ spec:
             port: healthz
         resources:
           limits:
-            cpu: null
             memory: 750Mi
           requests:
             cpu: 75m
@@ -6517,7 +6516,6 @@ spec:
             port: healthz
         resources:
           limits:
-            cpu: null
             memory: 256Mi
           requests:
             cpu: 50m
@@ -6605,7 +6603,6 @@ spec:
             port: healthz
         resources:
           limits:
-            cpu: null
             memory: 64Mi
           requests:
             cpu: 10m
@@ -6697,7 +6694,6 @@ spec:
             port: http
         resources:
           limits:
-            cpu: null
             memory: 256Mi
           requests:
             cpu: 50m
