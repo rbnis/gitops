@@ -44,7 +44,6 @@ spec:
             cpu: 10m
             memory: 50Mi
           limits:
-            cpu: null
             memory: 50Mi
     prometheus:
       prometheusSpec:
