@@ -9,8 +9,8 @@ spec:
     istio: ingressgateway
   servers:
     - hosts:
-        - "rbn.is"
-        - "*.rbn.is"
+        - ./rbn.is
+        - ./*.rbn.is
       port:
         number: 80
         name: http
@@ -18,8 +18,8 @@ spec:
       tls:
         httpsRedirect: false
     - hosts:
-        - "rbn.is"
-        - "*.rbn.is"
+        - ./rbn.is
+        - ./*.rbn.is
       port:
         number: 443
         name: https

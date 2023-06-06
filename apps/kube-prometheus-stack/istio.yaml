@@ -9,7 +9,7 @@ spec:
     istio: ingressgateway
   servers:
     - hosts:
-        - grafana.${cluster_name}.rbn.is
+        - ./grafana.${cluster_name}.rbn.is
       port:
         number: 80
         name: http
@@ -17,7 +17,7 @@ spec:
       tls:
         httpsRedirect: false
     - hosts:
-        - grafana.${cluster_name}.rbn.is
+        - ./grafana.${cluster_name}.rbn.is
       port:
         number: 443
         name: https
