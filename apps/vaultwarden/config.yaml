@@ -1,0 +1,52 @@
+---
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: vaultwarden-config
+  labels:
+    app.kubernetes.io/name: vaultwarden
+data:
+  SIGNUPS_ALLOWED: "false"
+  INVITATIONS_ALLOWED: "true"
+
+  # # Websocket support for notifications
+  # # See: https://github.com/dani-garcia/bitwarden_rs#enabling-websocket-notifications
+  WEBSOCKET_ENABLED: "true"
+  WEBSOCKET_PORT: "3012"
+
+  # # Needed for U2F authentification
+  # # See: https://github.com/dani-garcia/bitwarden_rs#enabling-u2f-authentication
+  # # TODO: Not supported currently
+  # # TODO: Automatically template this into the ingress configuration
+  DOMAIN: "https://pass.rbn.is"
+
+  # # Configuration of YubiKey OTP
+  # # See: https://github.com/dani-garcia/bitwarden_rs#enabling-yubikey-otp-authentication
+  # YUBICO_CLIENT_ID: YUBICO_CLIENT_ID
+  # YUBICO_SECRET_KEY: YUBICO_SECRET_KEY
+
+  # # API request size limits
+  # # See: https://github.com/dani-garcia/bitwarden_rs#changing-the-api-request-size-limit
+  # ROCKET_LIMITS: "{json=10485760}"
+
+  # # Number of workers to spin up for the service
+  # # See: https://github.com/dani-garcia/bitwarden_rs#changing-the-number-of-workers
+  # ROCKET_WORKERS: 10
+
+  # Show password hint instead of sending it via email
+  # See: https://github.com/dani-garcia/bitwarden_rs#password-hint-display
+  SHOW_PASSWORD_HINTS: "false"
+
+  # Enable Vault interface, when disabled, only API is served
+  # See: https://github.com/dani-garcia/bitwarden_rs#disabling-or-overriding-the-vault-interface-hosting
+  # TODO: enable settings web-vault content; init-container + shared storage + web-vault path?
+  WEB_VAULT_ENABLED: "true"
+
+  # # Logging to a specific file
+  # # See: https://github.com/dani-garcia/bitwarden_rs#logging
+  # LOG_FILE=/data/bitwarden.log
+
+  # Port to serve http requests on. Define it accordingly to the service's target_port
+  ROCKET_PORT: "8080"
+
+  DATA_FOLDER: "/bw-data"
