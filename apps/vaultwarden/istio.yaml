@@ -15,7 +15,7 @@ spec:
         name: http
         protocol: HTTP
       tls:
-        httpsRedirect: false
+        httpsRedirect: true
     - hosts:
         - ./pass.rbn.is
       port:
