@@ -9,7 +9,7 @@ spec:
   commonName: rbn.is
   dnsNames:
     - rbn.is
-    - "canary.rbn.is"
+    - "*.rbn.is"
   issuerRef:
     name: letsencrypt-production
     kind: ClusterIssuer
