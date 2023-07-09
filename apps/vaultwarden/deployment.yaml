@@ -27,7 +27,7 @@ spec:
           effect: "NoSchedule"
       containers:
         - name: vaultwarden
-          image: ghcr.io/dani-garcia/vaultwarden:1.28.1
+          image: ghcr.io/dani-garcia/vaultwarden:1.29.0
           imagePullPolicy: IfNotPresent
           envFrom:
             - configMapRef:
