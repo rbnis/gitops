@@ -10,11 +10,6 @@ data:
   SIGNUPS_ALLOWED: "false"
   INVITATIONS_ALLOWED: "true"
 
-  # # Websocket support for notifications
-  # # See: https://github.com/dani-garcia/bitwarden_rs#enabling-websocket-notifications
-  WEBSOCKET_ENABLED: "true"
-  WEBSOCKET_PORT: "3012"
-
   # # Needed for U2F authentification
   # # See: https://github.com/dani-garcia/bitwarden_rs#enabling-u2f-authentication
   # # TODO: Not supported currently

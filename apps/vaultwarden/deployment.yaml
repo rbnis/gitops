@@ -39,9 +39,6 @@ spec:
             - name: http
               containerPort: 8080
               protocol: TCP
-            - name: websocket
-              containerPort: 3012
-              protocol: TCP
           volumeMounts:
             - mountPath: "/bw-data"
               name: data

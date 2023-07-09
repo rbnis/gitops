@@ -41,5 +41,3 @@ spec:
       route:
         - destination:
             host: vaultwarden
-            port:
-              number: 80

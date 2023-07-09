@@ -15,7 +15,3 @@ spec:
       port: 80
       targetPort: http
       protocol: TCP
-    - name: websocket
-      port: 3012
-      targetPort: websocket
-      protocol: TCP
