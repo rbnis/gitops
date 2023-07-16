@@ -21,6 +21,7 @@ spec:
     global:
       logAsJson: true
       proxy:
+        holdApplicationUntilProxyStarts: true
         resources:
           limits: null
     pilot:
