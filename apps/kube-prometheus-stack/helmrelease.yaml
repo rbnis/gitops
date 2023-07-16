@@ -21,6 +21,9 @@ spec:
     crds: CreateReplace
   values:
     prometheusOperator:
+      # Wait for istio sidecar injection to complete before starting prometheus-operator
+      podAnnotations:
+        proxy.istio.io/config: '{ "holdApplicationUntilProxyStarts": true }'
       # Disable istio sidecar injection for admission webhooks
       admissionWebhooks:
         patch:
@@ -104,6 +107,9 @@ spec:
           limits:
             memory: 100Mi
     kube-state-metrics:
+      # Wait for istio sidecar injection to complete before starting kube-state-metrics
+      podAnnotations:
+        proxy.istio.io/config: '{ "holdApplicationUntilProxyStarts": true }'
       # Allow scheduling kube-state-metrics on spot instances
       tolerations:
         - key: "kubernetes.azure.com/scalesetpriority"
