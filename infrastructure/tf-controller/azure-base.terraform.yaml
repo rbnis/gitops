@@ -1,0 +1,14 @@
+---
+apiVersion: infra.contrib.fluxcd.io/v1alpha2
+kind: Terraform
+metadata:
+  name: azure-base
+  namespace: terraform
+spec:
+  interval: 1m
+  # approvePlan: auto
+  path: ./azure-base
+  sourceRef:
+    kind: GitRepository
+    name: gitops-tf
+    namespace: flux-system
