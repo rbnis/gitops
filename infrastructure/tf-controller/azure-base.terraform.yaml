@@ -11,4 +11,4 @@ spec:
   sourceRef:
     kind: GitRepository
     name: gitops-tf
-    namespace: flux-system
+    namespace: terraform
