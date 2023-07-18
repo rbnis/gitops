@@ -12,3 +12,6 @@ spec:
     kind: GitRepository
     name: gitops-tf
     namespace: terraform
+  varsFrom:
+    - kind: Secret
+      name: terraform
