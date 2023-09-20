@@ -40,14 +40,6 @@ spec:
   gateways:
     - rbnis
   http:
-    - name: rbnis-canary
-      match:
-        - authority:
-            exact: "canary.rbn.is"
-      route:
-        - destination:
-            host: rbnis.rbnis.svc.cluster.local
-            subset: canary
     - name: wildcard-redirect
       match:
         - authority:
@@ -72,6 +64,3 @@ spec:
   - name: stable
     labels:
       track: stable
-  - name: canary
-    labels:
-      track: canary
