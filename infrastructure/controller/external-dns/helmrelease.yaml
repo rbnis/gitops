@@ -1,11 +1,20 @@
 ---
+apiVersion: source.toolkit.fluxcd.io/v1beta2
+kind: HelmRepository
+metadata:
+  name: external-dns
+  namespace: external-dns
+spec:
+  interval: 24h
+  url: https://kubernetes-sigs.github.io/external-dns/
+---
 apiVersion: helm.toolkit.fluxcd.io/v2beta2
 kind: HelmRelease
 metadata:
   name: external-dns
   namespace: external-dns
 spec:
-  interval: 5m
+  interval: 30m
   chart:
     spec:
       # renovate: registryUrl=https://kubernetes-sigs.github.io/external-dns/
@@ -14,10 +23,10 @@ spec:
       sourceRef:
         kind: HelmRepository
         name: external-dns
-        namespace: flux-system
+        namespace: external-dns
   values:
     serviceMonitor:
-      enabled: false
+      enabled: true
     provider: cloudflare
     env:
       - name: CF_API_TOKEN
@@ -26,11 +35,12 @@ spec:
             name: cloudflare-api-token
             key: api-token
     sources:
-      # - service
-      # - ingress
+      - ingress
       - istio-gateway
-      # - istio-virtualservice
-    policy: upsert-only #TODO
+      - gateway-httproute
+      - gateway-tlsroute
+      - gateway-tcproute
+      - gateway-udproute
     txtOwnerId: "${cluster_name}"
     logFormat: json
     tolerations:

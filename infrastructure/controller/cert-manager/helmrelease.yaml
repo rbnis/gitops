@@ -1,11 +1,20 @@
 ---
+apiVersion: source.toolkit.fluxcd.io/v1beta2
+kind: HelmRepository
+metadata:
+  name: jetstack
+  namespace: cert-manager
+spec:
+  interval: 24h
+  url: https://charts.jetstack.io/
+---
 apiVersion: helm.toolkit.fluxcd.io/v2beta2
 kind: HelmRelease
 metadata:
   name: cert-manager
   namespace: cert-manager
 spec:
-  interval: 5m
+  interval: 30m
   chart:
     spec:
       # renovate: registryUrl=https://charts.jetstack.io/
@@ -14,12 +23,12 @@ spec:
       sourceRef:
         kind: HelmRepository
         name: jetstack
-        namespace: flux-system
+        namespace: cert-manager
   values:
-    installCRDs: false
+    installCRDs: true
     prometheus:
       servicemonitor:
-        enabled: false
+        enabled: true
     tolerations:
       - key: "kubernetes.azure.com/scalesetpriority"
         operator: "Equal"
