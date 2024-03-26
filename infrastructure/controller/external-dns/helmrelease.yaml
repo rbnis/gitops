@@ -36,11 +36,6 @@ spec:
             key: api-token
     sources:
       - ingress
-      - istio-gateway
-      - gateway-httproute
-      - gateway-tlsroute
-      - gateway-tcproute
-      - gateway-udproute
     txtOwnerId: "${cluster_name}"
     logFormat: json
     tolerations:
