@@ -8,7 +8,7 @@ spec:
   interval: 10m0s
   path: ./infrastructure/controller/external-dns
   components:
-    - overlays/gateway-api
+    - components/gateway-api
   dependsOn:
     - name: crds
   prune: true
