@@ -1,0 +1,29 @@
+---
+apiVersion: networking.istio.io/v1beta1
+kind: Gateway
+metadata:
+  name: rbnis
+  namespace: rbnis
+spec:
+  selector:
+    istio: ingressgateway
+  servers:
+    - hosts:
+        - ./rbn.is
+        - ./*.rbn.is
+      port:
+        number: 80
+        name: http
+        protocol: HTTP
+      tls:
+        httpsRedirect: true
+    - hosts:
+        - ./rbn.is
+        - ./*.rbn.is
+      port:
+        number: 443
+        name: https
+        protocol: HTTPS
+      tls:
+        mode: SIMPLE
+        credentialName: cert-rbnis
