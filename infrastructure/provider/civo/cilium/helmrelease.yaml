@@ -27,15 +27,13 @@ spec:
   values:
     gatewayAPI:
       enabled: true
-    # bpf:
-    #   hostRouting: true -> hostLegacyRouting: true
     kubeProxyReplacement: true
+    bpf:
+      masquerade: true
+      hostLegacyRouting: false
     cgroup:
       autoMount:
         enabled: false
       hostRoot: /sys/fs/cgroup
-    # containerRuntime:
-    #   integration: containerd
-    #   socketPath: /var/run/k3s/containerd/containerd.sock
     operator:
       replicas: 1
