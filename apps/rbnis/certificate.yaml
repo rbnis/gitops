@@ -3,7 +3,7 @@ apiVersion: cert-manager.io/v1
 kind: Certificate
 metadata:
   name: cert-rbnis
-  namespace: istio-ingress
+  namespace: rbnis
 spec:
   secretName: cert-rbnis
   commonName: rbn.is

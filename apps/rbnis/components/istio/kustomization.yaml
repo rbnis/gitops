@@ -9,3 +9,9 @@ patches:
       kind: Namespace
       name: rbnis
     path: namespace.yaml
+  - target:
+      group: cert-manager.io
+      version: v1
+      kind: Certificate
+      name: cert-rbnis
+    path: certificate.yaml
