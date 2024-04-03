@@ -29,6 +29,7 @@ spec:
       enabled: true
     # bpf:
     #   hostRouting: true -> hostLegacyRouting: true
+    kubeProxyReplacement: true
     cgroup:
       autoMount:
         enabled: false
