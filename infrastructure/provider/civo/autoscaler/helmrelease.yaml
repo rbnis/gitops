@@ -17,6 +17,7 @@ spec:
   interval: 30m
   chart:
     spec:
+      # renovate: registryUrl=https://kubernetes.github.io/autoscaler
       chart: cluster-autoscaler
       version: "9.36.0"
       sourceRef:
