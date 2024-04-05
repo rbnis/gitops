@@ -37,6 +37,7 @@ spec:
     sources:
       - ingress
     txtOwnerId: "${cluster_name}"
+    policy: sync
     logFormat: json
     tolerations:
       - key: "kubernetes.azure.com/scalesetpriority"
