@@ -7,8 +7,6 @@ metadata:
 spec:
   interval: 10m0s
   path: ./infrastructure/controller/external-dns
-  components:
-    - components/istio
   dependsOn:
     - name: crds
   prune: true
