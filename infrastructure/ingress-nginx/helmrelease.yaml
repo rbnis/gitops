@@ -1,0 +1,83 @@
+---
+apiVersion: source.toolkit.fluxcd.io/v1
+kind: HelmRepository
+metadata:
+  name: ingress-nginx
+  namespace: ingress-nginx
+spec:
+  interval: 24h
+  url: https://kubernetes.github.io/ingress-nginx
+---
+apiVersion: helm.toolkit.fluxcd.io/v2
+kind: HelmRelease
+metadata:
+  name: ingress-nginx
+  namespace: ingress-nginx
+spec:
+  interval: 30m
+  chart:
+    spec:
+      chart: ingress-nginx
+      sourceRef:
+        kind: HelmRepository
+        name: ingress-nginx
+        namespace: ingress-nginx
+      version: "4.11.0"
+  values:
+    controller:
+      nodeSelector:
+        kubernetes.io/os: linux
+      autoscaling:
+        enabled: true
+        maxReplicas: 3
+        minReplicas: 1
+      updateStrategy:
+        rollingUpdate:
+          maxUnavailable: 1
+        type: RollingUpdate
+      maxUnavailable: 1
+      terminationGracePeriodSeconds: 60
+
+      service:
+        annotations:
+          service.beta.kubernetes.io/azure-load-balancer-health-probe-request-path: /healthz
+        enableHttp: false
+        externalTrafficPolicy: Local
+        sessionAffinity: None
+
+      ingressClassResource:
+        default: true
+      watchIngressWithoutClass: true
+
+      resources:
+        requests:
+          cpu: 50m
+          memory: 200Mi
+
+      enableAnnotationValidations: true
+      admissionWebhooks:
+        enabled: false
+        patch:
+          nodeSelector:
+            kubernetes.io/os: linux
+
+      metrics:
+        enabled: true
+        service:
+          annotations:
+            prometheus.io/port: "10254"
+            prometheus.io/scrape: "true"
+        serviceMonitor:
+          enabled: true
+
+      config:
+        log-format-escape-json: "true"
+        log-format-upstream: '{"timestamp":"$time_iso8601","network":{"forwarded_ip":"$http_x_forwarded_for","proxy_ip":"$proxy_add_x_forwarded_for"},"user":{"name":"$remote_user","address":"$remote_addr"},"user_agent":{"original":"$http_user_agent"},"http":{"version":"$server_protocol","request":{"body":{"bytes":$body_bytes_sent},"bytes":$request_length,"method":"$request_method","referrer":"$http_referer"},"response":{"body":{"bytes":$body_bytes_sent},"bytes":$bytes_sent,"status_code":"$status","time":$request_time},"upstream":{"bytes":$upstream_response_length,"status_code":"$upstream_status","time":$upstream_response_time,"address":"$upstream_addr","name":"$proxy_upstream_name"}},"url":{"domain":"$host","path":"$uri","query":"$args","original":"$request_uri"}}'
+
+    defaultBackend:
+      enabled: false
+      nodeSelector:
+        kubernetes.io/os: linux
+
+    podSecurityPolicy:
+      enabled: false
