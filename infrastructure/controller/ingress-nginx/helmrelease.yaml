@@ -41,7 +41,6 @@ spec:
       service:
         annotations:
           service.beta.kubernetes.io/azure-load-balancer-health-probe-request-path: /healthz
-        enableHttp: false
         externalTrafficPolicy: Local
         sessionAffinity: None
 
