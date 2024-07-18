@@ -21,11 +21,7 @@ spec:
       serviceAccountName: vaultwarden
       securityContext:
         fsGroup: 1000
-      tolerations:
-        - key: "kubernetes.azure.com/scalesetpriority"
-          operator: "Equal"
-          value: "spot"
-          effect: "NoSchedule"
+      tolerations: []
       containers:
         - name: vaultwarden
           image: ghcr.io/dani-garcia/vaultwarden:1.31.0

@@ -1,0 +1,16 @@
+---
+apiVersion: networking.istio.io/v1beta1
+kind: VirtualService
+metadata:
+  name: vaultwarden
+  namespace: vaultwarden
+spec:
+  hosts:
+    - pass.rbn.is
+  gateways:
+    - vaultwarden
+  http:
+    - name: vaultwarden
+      route:
+        - destination:
+            host: vaultwarden

@@ -7,9 +7,12 @@ metadata:
 spec:
   interval: 10m0s
   path: ./apps/vaultwarden
+  components:
+    - components/aks
+    - components/ingress-nginx
   dependsOn:
     - name: crds
-    - name: istio-ingress
+    - name: ingress-nginx
   prune: true
   sourceRef:
     kind: GitRepository

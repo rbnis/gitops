@@ -1,4 +1,5 @@
 ---
+# This should be part of the aks component. But for now I cant be bothered
 apiVersion: v1
 kind: PersistentVolumeClaim
 metadata:
