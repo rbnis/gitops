@@ -7,10 +7,12 @@ metadata:
 spec:
   interval: 10m0s
   path: ./apps/kube-prometheus-stack
+  components:
+    - components/aks
+    - components/ingress-nginx
   dependsOn:
     - name: crds
-    - name: helm-repos
-    - name: istio-ingress
+    - name: ingress-nginx
   prune: true
   sourceRef:
     kind: GitRepository

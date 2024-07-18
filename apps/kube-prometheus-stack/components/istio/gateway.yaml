@@ -25,19 +25,3 @@ spec:
       tls:
         mode: SIMPLE
         credentialName: cert-grafana
----
-apiVersion: networking.istio.io/v1beta1
-kind: VirtualService
-metadata:
-  name: grafana
-  namespace: observability
-spec:
-  hosts:
-    - grafana.${cluster_name}.rbn.is
-  gateways:
-    - grafana
-  http:
-    - name: grafana
-      route:
-        - destination:
-            host: kube-prometheus-stack-grafana

@@ -3,7 +3,7 @@ apiVersion: cert-manager.io/v1
 kind: Certificate
 metadata:
   name: cert-grafana
-  namespace: istio-ingress
+  namespace: observability
 spec:
   secretName: cert-grafana
   commonName: grafana.${cluster_name}.rbn.is

@@ -1,0 +1,12 @@
+- op: replace
+  path: /spec/values/grafana/ingress/enabled
+  value: true
+- op: add
+  path: /spec/values/grafana/ingress/hosts/-
+  value: grafana.${cluster_name}.rbn.is
+- op: add
+  path: /spec/values/grafana/ingress/tls/-
+  value:
+    secretName: cert-grafana
+    hosts:
+      - grafana.${cluster_name}.rbn.is

@@ -1,11 +1,20 @@
 ---
+apiVersion: source.toolkit.fluxcd.io/v1
+kind: HelmRepository
+metadata:
+  name: prometheus-community
+  namespace: observability
+spec:
+  interval: 24h
+  url: https://prometheus-community.github.io/helm-charts
+---
 apiVersion: helm.toolkit.fluxcd.io/v2
 kind: HelmRelease
 metadata:
   name: kube-prometheus-stack
   namespace: observability
 spec:
-  interval: 5m
+  interval: 30m
   chart:
     spec:
       # renovate: registryUrl=https://prometheus-community.github.io/helm-charts
@@ -14,24 +23,20 @@ spec:
       sourceRef:
         kind: HelmRepository
         name: prometheus-community
-        namespace: flux-system
+        namespace: observability
   install:
     crds: Create
   upgrade:
     crds: CreateReplace
   values:
     prometheusOperator:
+      # This should be part of the istio component. But for now I cant be bothered
       # Disable istio sidecar injection for admission webhooks
       admissionWebhooks:
         patch:
           podAnnotations:
             sidecar.istio.io/inject: "false"
-      # Allow scheduling prometheusOperator on spot instances
-      tolerations:
-        - key: "kubernetes.azure.com/scalesetpriority"
-          operator: "Equal"
-          value: "spot"
-          effect: "NoSchedule"
+      tolerations: []
       resources:
         requests:
           cpu: 10m
@@ -67,6 +72,10 @@ spec:
         existingSecret: grafana-admin
         userKey: username
         passwordKey: password
+      ingress:
+        enabled: false
+        hosts: []
+        tls: []
       sidecar:
         notifiers:
           enabled: true
@@ -77,12 +86,7 @@ spec:
             memory: 100Mi
           limits:
             memory: 100Mi
-      # Allow scheduling grafana on spot instances
-      tolerations:
-        - key: "kubernetes.azure.com/scalesetpriority"
-          operator: "Equal"
-          value: "spot"
-          effect: "NoSchedule"
+      tolerations: []
       resources:
         requests:
           cpu: 10m
@@ -91,12 +95,7 @@ spec:
           memory: 150Mi
     alertmanager:
       alertmanagerSpec:
-        # Allow scheduling alertmanager on spot instances
-        tolerations:
-          - key: "kubernetes.azure.com/scalesetpriority"
-            operator: "Equal"
-            value: "spot"
-            effect: "NoSchedule"
+        tolerations: []
         resources:
           requests:
             cpu: 10m
@@ -104,12 +103,7 @@ spec:
           limits:
             memory: 100Mi
     kube-state-metrics:
-      # Allow scheduling kube-state-metrics on spot instances
-      tolerations:
-        - key: "kubernetes.azure.com/scalesetpriority"
-          operator: "Equal"
-          value: "spot"
-          effect: "NoSchedule"
+      tolerations: []
       resources:
         requests:
           cpu: 10m
