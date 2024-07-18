@@ -1,0 +1,34 @@
+---
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: rbnis
+  namespace: rbnis
+spec:
+  ingressClassName: nginx
+  rules:
+    - host: "rbn.is"
+      http:
+        paths:
+          - path: /
+            pathType: Prefix
+            backend:
+              service:
+                name: rbnis
+                port:
+                  number: 80
+    - host: "*.rbn.is"
+      http:
+        paths:
+          - path: /
+            pathType: Prefix
+            backend:
+              service:
+                name: rbnis
+                port:
+                  number: 80
+  tls:
+    - hosts:
+        - "rbn.is"
+        - "*.rbn.is"
+      secretName: cert-rbnis

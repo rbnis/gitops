@@ -9,10 +9,10 @@ spec:
   path: ./apps/rbnis
   components:
     - components/aks
-    - components/istio
+    - components/ingress-nginx
   dependsOn:
     - name: crds
-    - name: istio-ingress
+    - name: ingress-nginx
   prune: true
   sourceRef:
     kind: GitRepository
