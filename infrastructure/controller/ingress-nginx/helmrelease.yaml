@@ -31,12 +31,6 @@ spec:
         enabled: true
         maxReplicas: 3
         minReplicas: 1
-      updateStrategy:
-        rollingUpdate:
-          maxUnavailable: 1
-        type: RollingUpdate
-      maxUnavailable: 1
-      terminationGracePeriodSeconds: 60
 
       service:
         annotations:
@@ -55,7 +49,6 @@ spec:
 
       enableAnnotationValidations: true
       admissionWebhooks:
-        enabled: false
         patch:
           nodeSelector:
             kubernetes.io/os: linux
@@ -77,6 +70,3 @@ spec:
       enabled: false
       nodeSelector:
         kubernetes.io/os: linux
-
-    podSecurityPolicy:
-      enabled: false
