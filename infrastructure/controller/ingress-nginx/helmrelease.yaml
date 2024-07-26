@@ -44,8 +44,8 @@ spec:
 
       resources:
         requests:
-          cpu: 50m
-          memory: 200Mi
+          cpu: 25m
+          memory: 100Mi
 
       enableAnnotationValidations: true
       admissionWebhooks:
