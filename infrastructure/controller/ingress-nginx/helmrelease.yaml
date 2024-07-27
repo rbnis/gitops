@@ -29,8 +29,9 @@ spec:
         kubernetes.io/os: linux
       autoscaling:
         enabled: true
-        maxReplicas: 3
         minReplicas: 1
+        maxReplicas: 3
+        targetMemoryUtilizationPercentage: 80
 
       service:
         annotations:
@@ -45,7 +46,7 @@ spec:
       resources:
         requests:
           cpu: 25m
-          memory: 100Mi
+          memory: 150Mi
 
       enableAnnotationValidations: true
       admissionWebhooks:
