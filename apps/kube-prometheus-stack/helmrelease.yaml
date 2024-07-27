@@ -105,6 +105,10 @@ spec:
         default:
           17453-nginx-ingress-controller:
             url: https://raw.githubusercontent.com/kubernetes/ingress-nginx/main/deploy/grafana/dashboards/nginx.json
+          15038-external-dns:
+            gnetId: 15038
+            revision: 3
+            datasource: Prometheus
       tolerations: []
       resources:
         requests:
