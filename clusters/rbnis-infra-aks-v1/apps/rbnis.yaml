@@ -10,6 +10,7 @@ spec:
   components:
     - components/aks
     - components/ingress-nginx
+    - components/observability
   dependsOn:
     - name: crds
     - name: ingress-nginx
