@@ -7,3 +7,9 @@ patches:
       kind: HelmRelease
       name: kube-prometheus-stack
     path: kube-prometheus-stack.helmrelease.yaml
+  - target:
+      group: helm.toolkit.fluxcd.io
+      version: v2
+      kind: HelmRelease
+      name: prometheus-blackbox-exporter
+    path: prometheus-blackbox-exporter.helmrelease.yaml

@@ -6,4 +6,5 @@ resources:
   - "grafana-notifiers.sectret.sops.yaml"
   - "helmrepository.yaml"
   - "kube-prometheus-stack.helmrelease.yaml"
+  - "prometheus-blackbox-exporter.helmrelease.yaml"
   - "certificate.yaml"
