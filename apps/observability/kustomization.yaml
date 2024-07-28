@@ -4,7 +4,11 @@ resources:
   - namespace.yaml
   - grafana-admin.secret.sops.yaml
   - grafana-notifiers.secret.sops.yaml
+  - loki-storage.secret.sops.yaml
   - helmrepository.yaml
   - kube-prometheus-stack.helmrelease.yaml
   - prometheus-blackbox-exporter.helmrelease.yaml
+  - loki.helmrelease.yaml
+  - loki-datasource.configmap.yaml
+  - promtail.helmrelease.yaml
   - certificate.yaml

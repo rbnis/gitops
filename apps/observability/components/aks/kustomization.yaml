@@ -13,3 +13,15 @@ patches:
       kind: HelmRelease
       name: prometheus-blackbox-exporter
     path: prometheus-blackbox-exporter.helmrelease.yaml
+  - target:
+      group: helm.toolkit.fluxcd.io
+      version: v2
+      kind: HelmRelease
+      name: loki
+    path: loki.helmrelease.yaml
+  - target:
+      group: helm.toolkit.fluxcd.io
+      version: v2
+      kind: HelmRelease
+      name: promtail
+    path: promtail.helmrelease.yaml
