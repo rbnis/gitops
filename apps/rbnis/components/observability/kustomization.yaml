@@ -2,3 +2,13 @@ apiVersion: kustomize.config.k8s.io/v1alpha1
 kind: Component
 resources:
   - servicemonitor.yaml
+configMapGenerator:
+  - name: rbnis-overview-dashboard
+    namespace: rbnis
+    files:
+      - rbnis-overview.json=dashboards/overview.json
+    options:
+      disableNameSuffixHash: true
+      labels:
+        grafana_dashboard: "1"
+
