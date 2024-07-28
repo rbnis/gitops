@@ -4,5 +4,6 @@ resources:
   - "namespace.yaml"
   - "grafana-admin.secret.sops.yaml"
   - "grafana-notifiers.sectret.sops.yaml"
-  - "helmrelease.yaml"
+  - "helmrepository.yaml"
+  - "kube-prometheus-stack.helmrelease.yaml"
   - "certificate.yaml"

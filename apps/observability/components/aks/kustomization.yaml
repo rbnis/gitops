@@ -6,4 +6,4 @@ patches:
       version: v2
       kind: HelmRelease
       name: kube-prometheus-stack
-    path: helmrelease.yaml
+    path: kube-prometheus-stack.helmrelease.yaml
