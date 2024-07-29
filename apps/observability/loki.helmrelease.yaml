@@ -42,6 +42,17 @@ spec:
               period: 24h
             object_store: azure
             schema: v13
+      rulerConfig:
+        storage:
+          type: local
+          local:
+            directory: /loki/rules
+        rule_path: /tmp/rules/fake/
+        alertmanager_url: http://kube-prometheus-stack-alertmanager:9093
+        ring:
+          kvstore:
+            store: inmemory
+        enable_api: true
       storage:
         type: 'azure'
     singleBinary:
