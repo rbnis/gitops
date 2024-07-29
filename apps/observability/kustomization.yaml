@@ -12,3 +12,12 @@ resources:
   - loki-datasource.configmap.yaml
   - promtail.helmrelease.yaml
   - certificate.yaml
+configMapGenerator:
+  - name: alerts-certificates
+    namespace: observability
+    files:
+      - alerts/certificates.yaml
+    options:
+      disableNameSuffixHash: true
+      labels:
+        grafana_alert: "1"

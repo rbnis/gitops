@@ -11,4 +11,11 @@ configMapGenerator:
       disableNameSuffixHash: true
       labels:
         grafana_dashboard: "1"
-
+  - name: rbnis-blackbox-alert
+    namespace: rbnis
+    files:
+      - rbnis-blackbox.yaml=alerts/blackbox.yaml
+    options:
+      disableNameSuffixHash: true
+      labels:
+        grafana_alert: "1"
