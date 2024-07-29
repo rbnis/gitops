@@ -21,3 +21,20 @@ configMapGenerator:
       disableNameSuffixHash: true
       labels:
         grafana_alert: "1"
+  - name: notificationpolicy
+    namespace: observability
+    files:
+      - notifications/notificationpolicy.yaml
+    options:
+      disableNameSuffixHash: true
+      labels:
+        grafana_alert: "1"
+secretGenerator:
+  - name: contactpoints
+    namespace: observability
+    files:
+      - contactpoints.yaml=notifications/contactpoints.sops.yaml
+    options:
+      disableNameSuffixHash: true
+      labels:
+        grafana_alert: "1"

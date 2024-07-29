@@ -1,0 +1,49 @@
+apiVersion: 1
+contactPoints:
+    - orgId: 1
+      name: telegram
+      receivers:
+        - uid: 777a27dc-b4d4-4411-91f2-ced0535d4404
+          type: telegram
+          disableResolveMessage: false
+          settings:
+            chatid: "1148910675"
+            bottoken: 1302350187:AAHRg5-zJ5Fs9w5qYooi036FFsq1W2iotTw
+sops:
+    kms: []
+    gcp_kms: []
+    azure_kv: []
+    hc_vault: []
+    age:
+        - recipient: age1c5e3523gtu22zh0qphsc0ug8ttdkpm8pcxwcrl5cck62lay2u4fqenpvfq
+          enc: |
+            -----BEGIN AGE ENCRYPTED FILE-----
+            YWdlLWVuY3J5cHRpb24ub3JnL3YxCi0+IFgyNTUxOSBIckhtZlRsTGNtbzNyOGJT
+            WEo5bFVDNEJWT2NUSU96RmVwN1U5WTI4eUhZCm9ZcHliRnVZYWpvdUgzMUJkYTZh
+            MUZiVlZaKzlRZXZDMkJJa1paYlIvZWsKLS0tIGFUa0JRUk1xOWZQQi9SOHlJcUZ4
+            UXU1aVRCZXFsTndiU0pNZTJLNm42M0kKz7hz1Aphy5ejNvmX0Shch7WPgP2B3CBU
+            ub8QvIRw5hSV1LCD6yn719CheCfdBU6icksqUHBoj+P47XuvJvd0Jg==
+            -----END AGE ENCRYPTED FILE-----
+        - recipient: age1vv0w9l4wam5aw2ns0x9tuwkzm942ajyq2setzy7pvpw3waev5qfsakd67a
+          enc: |
+            -----BEGIN AGE ENCRYPTED FILE-----
+            YWdlLWVuY3J5cHRpb24ub3JnL3YxCi0+IFgyNTUxOSBReUZOanZ5TGhjQlJ3Qnpq
+            K0plYkI2Y0RQOWZacitxQnlKQ2hTTDE3bkFJCnE3SXNlZG9BemhUSHg4T3B2Qm5x
+            bVN6bHI4enBuQklmWDZlT21KUm9YOG8KLS0tIE5xemthZ2tWY1UyUFU5V0E1OGU2
+            b2hRT0tESjFaSTNFREJjK0xnMXliZFEKbh3L39TC5ddcmqTZr1r1Gkxeb4jiy7QM
+            2UJnwYXTAIU2RyA8QsC6Zl6vBQaab/4+O42nr7D/1WQxVMDCCUbekg==
+            -----END AGE ENCRYPTED FILE-----
+        - recipient: age1ne2905tsuelq4u5g3s0007zanw20z5gjpkpkvctayquhc9pk2q5qvz2q5d
+          enc: |
+            -----BEGIN AGE ENCRYPTED FILE-----
+            YWdlLWVuY3J5cHRpb24ub3JnL3YxCi0+IFgyNTUxOSB0SEQrUDNTMEFUL3VTVnla
+            czBKMzdSdnB3eGRMV3dlWXZrMG9lTXc1d1VFCnJGQmRIZ0RIQWs1SjdFMzEyenV1
+            TnhLaU53OUl3NVU2RndhbW0weFNjaHcKLS0tIHZ0MnRvQnlnRlplRTN6dlJ4bW5V
+            aWRNdkxUVWprcStCR2tVYm9aYmlIS2sKOBoTD2iKdRoLCkHAGHBVVUq9UMph/SIg
+            4v3MZTLUstpbojnPb2EtoIEfpZBUCkdQYS/04SwcNarNEjP3cm7Cdg==
+            -----END AGE ENCRYPTED FILE-----
+    lastmodified: "2024-07-29T22:08:20Z"
+    mac: ENC[AES256_GCM,data:c1h/n9nhovY4rhlxorpL2nNahQFDHXjynOt1wH9bTBbsoIb4tVLr5BdUpkg2jMX5mqztnYEZy1m+Y7vMojihTWxbb20mif3+zKzFnB0fTxHvWUp0c2Blm5sS4gjZIPzqCUm6RjEBxPhHhqr18WG4YwBOB+qhV3m3ohY9DX0RFAw=,iv:cSn0N/uFxGUkQH+WBGZZqVw1X/6bSUv2eFTOAzTwpZc=,tag:ctsmujbi3tpMpcz+hFvGdQ==,type:str]
+    pgp: []
+    encrypted_regex: ^(data|stringData)$
+    version: 3.9.0
