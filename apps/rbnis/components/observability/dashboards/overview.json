@@ -18,7 +18,6 @@
   "editable": true,
   "fiscalYearStartMonth": 0,
   "graphTooltip": 0,
-  "id": 28,
   "links": [],
   "panels": [
     {
@@ -31,7 +30,7 @@
       },
       "id": 5,
       "panels": [],
-      "title": "Availability",
+      "title": "Stats",
       "type": "row"
     },
     {
@@ -195,6 +194,71 @@
         }
       ],
       "title": "Certificate Expiry",
+      "type": "stat"
+    },
+    {
+      "datasource": {
+        "type": "loki",
+        "uid": "P8E80F9AEF21F6940"
+      },
+      "description": "Users differentiated by User-Agent and IP",
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "thresholds"
+          },
+          "mappings": [],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green",
+                "value": null
+              }
+            ]
+          },
+          "unit": "none"
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 3,
+        "w": 5,
+        "x": 10,
+        "y": 1
+      },
+      "id": 13,
+      "options": {
+        "colorMode": "value",
+        "graphMode": "area",
+        "justifyMode": "auto",
+        "orientation": "auto",
+        "percentChangeColorMode": "standard",
+        "reduceOptions": {
+          "calcs": [
+            "max"
+          ],
+          "fields": "",
+          "values": false
+        },
+        "showPercentChange": false,
+        "textMode": "auto",
+        "wideLayout": true
+      },
+      "pluginVersion": "11.1.0",
+      "targets": [
+        {
+          "datasource": {
+            "type": "loki",
+            "uid": "P8E80F9AEF21F6940"
+          },
+          "editorMode": "code",
+          "expr": "count(count by (http_user_agent, http_x_forwarded_for) (count_over_time({job=\"rbnis/rbnis\"} | json | __error__ != `JSONParserErr` | http_user_agent !~\"kube-probe/1.30|Blackbox Exporter/0.25.0\" [$__range])))",
+          "queryType": "range",
+          "refId": "A"
+        }
+      ],
+      "title": "Unique visitors",
       "type": "stat"
     },
     {
@@ -987,6 +1051,6 @@
   "timezone": "browser",
   "title": "rbn.is - Overview",
   "uid": "da686069-18b4-42b2-a194-f7407b86d0d4",
-  "version": 4,
+  "version": 6,
   "weekStart": ""
 }
