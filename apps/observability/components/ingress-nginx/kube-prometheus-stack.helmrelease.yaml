@@ -10,6 +10,3 @@
     secretName: cert-grafana
     hosts:
       - grafana.${cluster_name}.rbn.is
-- op: add
-  path: /spec/values/grafana/ingress/annotations/external-dns.alpha.kubernetes.io~1cloudflare-proxied
-  value: "true"

@@ -3,6 +3,7 @@ kind: Kustomization
 resources:
   - namespace.yaml
   - grafana-admin.secret.sops.yaml
+  - client-auth-ca.secret.sops.yaml
   - grafana-notifiers.secret.sops.yaml
   - loki-storage.secret.sops.yaml
   - helmrepository.yaml

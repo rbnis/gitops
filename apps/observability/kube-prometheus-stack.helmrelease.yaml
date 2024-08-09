@@ -70,7 +70,10 @@ spec:
         enabled: false
         hosts: []
         tls: []
-        annotations: {}
+        annotations:
+          nginx.ingress.kubernetes.io/auth-tls-verify-client: "on"
+          nginx.ingress.kubernetes.io/auth-tls-secret: "observability/client-auth-ca"
+          nginx.ingress.kubernetes.io/auth-tls-verify-depth: "1"
       sidecar:
         dashboards:
           enabled: true
