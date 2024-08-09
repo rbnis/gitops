@@ -4,6 +4,8 @@ kind: Ingress
 metadata:
   name: rbnis
   namespace: rbnis
+  annotations:
+    external-dns.alpha.kubernetes.io/cloudflare-proxied: "true"
 spec:
   ingressClassName: nginx
   rules:
@@ -29,6 +31,7 @@ metadata:
   namespace: rbnis
   annotations:
     nginx.ingress.kubernetes.io/rewrite-target: https://rbn.is/$1$2
+    external-dns.alpha.kubernetes.io/cloudflare-proxied: "true"
 spec:
   ingressClassName: nginx
   rules:
