@@ -56,5 +56,6 @@ groups:
           for: 5m
           annotations:
             summary: '{{ index $labels "instance" }} is down.'
-          labels: {}
+          labels:
+            severity: critical
           isPaused: false

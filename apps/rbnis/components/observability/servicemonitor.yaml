@@ -8,27 +8,27 @@ metadata:
     app.kubernetes.io/name: rbnis
 spec:
   endpoints:
-  - port: http
-    scheme: http
-    path: "/probe"
-    interval: 30s
-    scrapeTimeout: 30s
-    params:
-      module:
-        - http_2xx
-      target:
-        - https://rbn.is
-      hostname:
-        - rbn.is
-    metricRelabelings:
-      - sourceLabels: [instance]
-        targetLabel: instance
-        replacement: https://rbn.is
-        action: replace
-      - sourceLabels: [target]
-        targetLabel: target
-        replacement: rbnis-blackbox-exporter
-        action: replace
+    - port: http
+      scheme: http
+      path: "/probe"
+      interval: 30s
+      scrapeTimeout: 30s
+      params:
+        module:
+          - http_2xx
+        target:
+          - https://rbn.is
+        hostname:
+          - rbn.is
+      metricRelabelings:
+        - sourceLabels: [instance]
+          targetLabel: instance
+          replacement: https://rbn.is
+          action: replace
+        - sourceLabels: [target]
+          targetLabel: target
+          replacement: rbnis-blackbox-exporter
+          action: replace
   jobLabel: rbnis-blackbox-exporter
   selector:
     matchLabels:

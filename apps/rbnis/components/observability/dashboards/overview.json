@@ -17,7 +17,7 @@
   },
   "editable": true,
   "fiscalYearStartMonth": 0,
-  "graphTooltip": 0,
+  "graphTooltip": 2,
   "links": [],
   "panels": [
     {
@@ -101,7 +101,7 @@
         "textMode": "auto",
         "wideLayout": true
       },
-      "pluginVersion": "11.1.0",
+      "pluginVersion": "11.1.3",
       "targets": [
         {
           "datasource": {
@@ -109,7 +109,7 @@
             "uid": "prometheus"
           },
           "editorMode": "code",
-          "expr": "probe_success{instance=\"https://rbn.is\"}",
+          "expr": "avg(probe_success{instance=\"https://rbn.is\"})",
           "instant": false,
           "legendFormat": "__auto",
           "range": true,
@@ -178,7 +178,7 @@
         "textMode": "auto",
         "wideLayout": true
       },
-      "pluginVersion": "11.1.0",
+      "pluginVersion": "11.1.3",
       "targets": [
         {
           "datasource": {
@@ -245,7 +245,7 @@
         "textMode": "auto",
         "wideLayout": true
       },
-      "pluginVersion": "11.1.0",
+      "pluginVersion": "11.1.3",
       "targets": [
         {
           "datasource": {
@@ -253,7 +253,7 @@
             "uid": "P8E80F9AEF21F6940"
           },
           "editorMode": "code",
-          "expr": "count(count by (http_user_agent, http_x_forwarded_for) (count_over_time({job=\"rbnis/rbnis\"} | json | __error__ != `JSONParserErr` | http_user_agent !~\"kube-probe/1.30|Blackbox Exporter/0.25.0\" [$__range])))",
+          "expr": "count(count by (http_user_agent, http_x_forwarded_for) (count_over_time({job=\"rbnis/rbnis\"} | json | __error__ != `JSONParserErr` | http_user_agent !~ \"kube-probe/1.30|Blackbox Exporter/0.25.0|Googlebot|InternetMeasurement|facebookexternalhit|SemrushBot|meta-externalagent|AhrefsBot|bingbot|PetalBot|GPTBot|Applebot|TelegramBot|TwitterBot|MJ12bot|ZoominfoBot\" [$__range])))",
           "queryType": "range",
           "refId": "A"
         }
@@ -282,7 +282,8 @@
       "fieldConfig": {
         "defaults": {
           "color": {
-            "mode": "thresholds"
+            "mode": "thresholds",
+            "seriesBy": "min"
           },
           "custom": {
             "axisBorderShow": false,
@@ -294,7 +295,7 @@
             "barAlignment": 0,
             "drawStyle": "line",
             "fillOpacity": 0,
-            "gradientMode": "none",
+            "gradientMode": "scheme",
             "hideFrom": {
               "legend": false,
               "tooltip": false,
@@ -302,6 +303,9 @@
             },
             "insertNulls": false,
             "lineInterpolation": "linear",
+            "lineStyle": {
+              "fill": "solid"
+            },
             "lineWidth": 2,
             "pointSize": 5,
             "scaleDistribution": {
@@ -320,6 +324,7 @@
           "fieldMinMax": false,
           "mappings": [],
           "max": 1,
+          "noValue": "1",
           "thresholds": {
             "mode": "absolute",
             "steps": [
@@ -369,11 +374,25 @@
             "uid": "prometheus"
           },
           "editorMode": "code",
-          "expr": "sum(rate(nginx_ingress_controller_requests{exported_namespace=\"rbnis\",status!~\"[4-5].*\"}[2m])) by (ingress) / sum(rate(nginx_ingress_controller_requests{exported_namespace=\"rbnis\"}[2m])) by (ingress)",
+          "expr": "sum(rate(nginx_ingress_controller_requests{exported_namespace=\"rbnis\",status!~\"[4].*\"}[2m])) by (ingress) / sum(rate(nginx_ingress_controller_requests{exported_namespace=\"rbnis\"}[2m])) by (ingress)",
+          "hide": false,
           "instant": false,
-          "legendFormat": "__auto",
+          "legendFormat": "4xx",
           "range": true,
           "refId": "A"
+        },
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "prometheus"
+          },
+          "editorMode": "code",
+          "expr": "sum(rate(nginx_ingress_controller_requests{exported_namespace=\"rbnis\",status!~\"[5].*\"}[2m])) by (ingress) / sum(rate(nginx_ingress_controller_requests{exported_namespace=\"rbnis\"}[2m])) by (ingress)",
+          "hide": false,
+          "instant": false,
+          "legendFormat": "5xx",
+          "range": true,
+          "refId": "B"
         }
       ],
       "title": "Ingress Success Rate (non-4|5xx responses)",
@@ -522,6 +541,7 @@
             }
           },
           "mappings": [],
+          "noValue": "0",
           "thresholds": {
             "mode": "absolute",
             "steps": [
@@ -1006,7 +1026,7 @@
         },
         "showHeader": true
       },
-      "pluginVersion": "11.1.0",
+      "pluginVersion": "11.1.3",
       "targets": [
         {
           "datasource": {
@@ -1051,6 +1071,6 @@
   "timezone": "browser",
   "title": "rbn.is - Overview",
   "uid": "da686069-18b4-42b2-a194-f7407b86d0d4",
-  "version": 6,
+  "version": 7,
   "weekStart": ""
 }

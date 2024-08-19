@@ -56,7 +56,8 @@ groups:
           for: 5m
           annotations:
             summary: Certificate for host {{ index $labels "host" }} is expiring in less than 7 days.
-          labels: {}
+          labels:
+            severity: warning
           isPaused: false
         - uid: fdt64j94wo8aoe
           title: Certificates Expired
@@ -109,5 +110,6 @@ groups:
           for: 5m
           annotations:
             summary: Certificate for host {{ index $labels "host" }} is expired.
-          labels: {}
+          labels:
+            severity: critical
           isPaused: false
