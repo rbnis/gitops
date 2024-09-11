@@ -68,6 +68,10 @@
     {
       "matchManagers": ["pre-commit"],
       "addLabels": ["pre-commit"]
+    },
+    {
+      "matchSourceUrls": ["https://github.com/istio/istio"],
+      "groupName": "istio"
     }
   ]
 }
