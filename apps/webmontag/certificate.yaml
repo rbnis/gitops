@@ -1,0 +1,14 @@
+---
+apiVersion: cert-manager.io/v1
+kind: Certificate
+metadata:
+  name: cert-webmontag
+  namespace: webmontag
+spec:
+  secretName: cert-webmontag
+  commonName: webmontag.rbn.is
+  dnsNames:
+    - webmontag.rbn.is
+  issuerRef:
+    name: letsencrypt-production
+    kind: ClusterIssuer

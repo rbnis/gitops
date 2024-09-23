@@ -1,0 +1,23 @@
+---
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: webmontag
+  namespace: webmontag
+spec:
+  ingressClassName: nginx
+  rules:
+    - host: webmontag.rbn.is
+      http:
+        paths:
+          - path: /
+            pathType: Prefix
+            backend:
+              service:
+                name: webmontag
+                port:
+                  number: 80
+  tls:
+    - hosts:
+        - webmontag.rbn.is
+      secretName: cert-webmontag

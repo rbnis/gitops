@@ -1,0 +1,13 @@
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: webmontag
+  namespace: webmontag
+spec:
+  selector:
+    app.kubernetes.io/name: webmontag
+  ports:
+    - name: http
+      port: 80
+      targetPort: http
