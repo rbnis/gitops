@@ -10,7 +10,7 @@ spec:
     spec:
       # renovate: registryUrl=https://prometheus-community.github.io/helm-charts
       chart: kube-prometheus-stack
-      version: 62.7.0
+      version: 63.0.0
       sourceRef:
         kind: HelmRepository
         name: prometheus-community
@@ -44,9 +44,12 @@ spec:
     prometheus:
       prometheusSpec:
         retention: 90d
-        podMonitorSelectorNilUsesHelmValues: false
-        serviceMonitorSelectorNilUsesHelmValues: false
-        ruleSelectorNilUsesHelmValues: false
+        podMonitorSelector:
+          matchLabels: null
+        serviceMonitorSelector:
+          matchLabels: null
+        ruleSelector:
+          matchLabels: null
         storageSpec:
           volumeClaimTemplate:
             spec:
