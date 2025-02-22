@@ -20,6 +20,9 @@ spec:
   upgrade:
     crds: CreateReplace
   values:
+    crds:
+      upgradeJob:
+        enabled: true
     prometheusOperator:
       # This should be part of the istio component. But for now I cant be bothered
       # Disable istio sidecar injection for admission webhooks
