@@ -10,7 +10,7 @@ spec:
     spec:
       # renovate: registryUrl=https://prometheus-community.github.io/helm-charts
       chart: kube-prometheus-stack
-      version: 66.3.1
+      version: 69.4.1
       sourceRef:
         kind: HelmRepository
         name: prometheus-community
@@ -20,6 +20,9 @@ spec:
   upgrade:
     crds: CreateReplace
   values:
+    crds:
+      upgradeJob:
+        enabled: true
     prometheusOperator:
       # This should be part of the istio component. But for now I cant be bothered
       # Disable istio sidecar injection for admission webhooks
