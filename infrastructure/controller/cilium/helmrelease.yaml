@@ -1,0 +1,46 @@
+apiVersion: helm.toolkit.fluxcd.io/v2
+kind: HelmRelease
+metadata:
+  name: cilium
+spec:
+  interval: 30m
+  chart:
+    spec:
+      # renovate: registryUrl=https://helm.cilium.io
+      chart: cilium
+      version: 1.18.0
+      sourceRef:
+        kind: HelmRepository
+        name: cilium
+  values:
+    encryption:
+      enabled: true
+      nodeEncryption: true
+      type: wireguard
+
+    egressGateway:
+      enabled: false
+
+    resources:
+      requests:
+        memory: 512Mi
+    operator:
+      replicas: 1
+      resources:
+        requests:
+          memory: 128Mi
+    hubble:
+      enabled: true
+      metrics:
+        enabled:
+          - dns
+          - drop
+          - tcp
+          - flow
+          - port-distribution
+          - icmp
+          - http
+      relay:
+        enabled: true
+      ui:
+        enabled: true

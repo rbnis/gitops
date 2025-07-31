@@ -1,0 +1,5 @@
+- op: add
+  path: /spec/values
+  value:
+    gatewayAPI:
+      enabled: true

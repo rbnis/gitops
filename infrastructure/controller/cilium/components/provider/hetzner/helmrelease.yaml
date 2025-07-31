@@ -1,0 +1,11 @@
+- op: add
+  path: /spec/values
+  value:
+    k8sServiceHost: 127.0.0.1
+    k8sServicePort: 6444
+
+    ipam:
+      mode: kubernetes
+    kubeProxyReplacement: true
+    bpf:
+      masquerade: false
