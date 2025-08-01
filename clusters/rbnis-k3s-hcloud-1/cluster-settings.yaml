@@ -4,3 +4,4 @@ metadata:
   name: cluster-settings
 data:
   cluster_name: rbnis-k3s-hcloud-1
+  cluster_primary_location: fsn1

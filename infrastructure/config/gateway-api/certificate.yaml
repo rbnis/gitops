@@ -1,0 +1,13 @@
+apiVersion: cert-manager.io/v1
+kind: Certificate
+metadata:
+  name: wildcard-rbn-is
+spec:
+  secretName: wildcard-rbn-is
+  commonName: rbn.is
+  dnsNames:
+    - rbn.is
+    - "*.rbn.is"
+  issuerRef:
+    name: letsencrypt-production
+    kind: ClusterIssuer

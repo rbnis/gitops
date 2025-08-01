@@ -5,6 +5,7 @@ resources:
   - crds.yaml
   - kured.yaml
   - cilium.yaml
+  - gateway-api.yaml
   - external-secrets.yaml
   - external-dns.yaml
   - cert-manager.yaml
