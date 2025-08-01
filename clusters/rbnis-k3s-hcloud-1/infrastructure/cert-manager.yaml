@@ -27,7 +27,7 @@ spec:
   sourceRef:
     kind: GitRepository
     name: flux-system
-  path: ./infrastructure/config/external-secrets
+  path: ./infrastructure/config/cert-manager
   components:
     - components/secrets/external
   prune: true
