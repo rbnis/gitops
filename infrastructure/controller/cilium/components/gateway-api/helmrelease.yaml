@@ -6,3 +6,4 @@ spec:
   values:
     gatewayAPI:
       enabled: true
+      enableAlpn: true
