@@ -46,4 +46,5 @@ spec:
           memory: 150Mi
         limits:
           memory: 150Mi
-    startupapicheck: []
+    startupapicheck:
+      tolerations: []
