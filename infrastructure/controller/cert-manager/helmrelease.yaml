@@ -1,39 +1,29 @@
----
-apiVersion: source.toolkit.fluxcd.io/v1
-kind: HelmRepository
-metadata:
-  name: jetstack
-  namespace: cert-manager
-spec:
-  interval: 24h
-  url: https://charts.jetstack.io/
----
 apiVersion: helm.toolkit.fluxcd.io/v2
 kind: HelmRelease
 metadata:
   name: cert-manager
-  namespace: cert-manager
 spec:
   interval: 30m
   chart:
     spec:
       # renovate: registryUrl=https://charts.jetstack.io/
       chart: cert-manager
-      version: v1.17.2
+      version: v1.18.2
       sourceRef:
         kind: HelmRepository
         name: jetstack
-        namespace: cert-manager
+  driftDetection:
+    mode: enabled
+  install:
+    crds: CreateReplace
+  upgrade:
+    crds: CreateReplace
   values:
     installCRDs: true
     prometheus:
       servicemonitor:
         enabled: true
-    tolerations:
-      - key: "kubernetes.azure.com/scalesetpriority"
-        operator: "Equal"
-        value: "spot"
-        effect: "NoSchedule"
+    tolerations: []
     resources:
       requests:
         cpu: 10m
@@ -41,11 +31,7 @@ spec:
       limits:
         memory: 150Mi
     webhook:
-      tolerations:
-        - key: "kubernetes.azure.com/scalesetpriority"
-          operator: "Equal"
-          value: "spot"
-          effect: "NoSchedule"
+      tolerations: []
       resources:
         requests:
           cpu: 10m
@@ -53,20 +39,11 @@ spec:
         limits:
           memory: 50Mi
     cainjector:
-      tolerations:
-        - key: "kubernetes.azure.com/scalesetpriority"
-          operator: "Equal"
-          value: "spot"
-          effect: "NoSchedule"
+      tolerations: []
       resources:
         requests:
           cpu: 10m
           memory: 150Mi
         limits:
           memory: 150Mi
-    startupapicheck:
-      tolerations:
-        - key: "kubernetes.azure.com/scalesetpriority"
-          operator: "Equal"
-          value: "spot"
-          effect: "NoSchedule"
+    startupapicheck: []

@@ -1,0 +1,28 @@
+- op: add
+  path: /spec/values/tolerations/-
+  value:
+    key: "kubernetes.azure.com/scalesetpriority"
+    operator: "Equal"
+    value: "spot"
+    effect: "NoSchedule"
+- op: add
+  path: /spec/values/webhook/tolerations/-
+  value:
+    key: "kubernetes.azure.com/scalesetpriority"
+    operator: "Equal"
+    value: "spot"
+    effect: "NoSchedule"
+- op: add
+  path: /spec/values/cainjector/tolerations/-
+  value:
+    key: "kubernetes.azure.com/scalesetpriority"
+    operator: "Equal"
+    value: "spot"
+    effect: "NoSchedule"
+- op: add
+  path: /spec/values/startupapicheck/tolerations/-
+  value:
+    key: "kubernetes.azure.com/scalesetpriority"
+    operator: "Equal"
+    value: "spot"
+    effect: "NoSchedule"

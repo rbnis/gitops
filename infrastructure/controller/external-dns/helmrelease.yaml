@@ -12,6 +12,8 @@ spec:
       sourceRef:
         kind: HelmRepository
         name: external-dns
+  driftDetection:
+    mode: enabled
   values:
     serviceMonitor:
       enabled: true

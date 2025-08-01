@@ -7,6 +7,8 @@ metadata:
 spec:
   interval: 10m0s
   path: ./infrastructure/controller/cert-manager
+  components:
+    - components/provider/azure
   dependsOn:
     - name: global-settings
     - name: crds
