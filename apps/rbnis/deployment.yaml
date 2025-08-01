@@ -1,9 +1,7 @@
----
 apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: rbnis
-  namespace: rbnis
   labels:
     app.kubernetes.io/name: rbnis
 spec:
@@ -60,7 +58,6 @@ apiVersion: policy/v1
 kind: PodDisruptionBudget
 metadata:
   name: rbnis
-  namespace: rbnis
 spec:
   maxUnavailable: 50%
   selector:
