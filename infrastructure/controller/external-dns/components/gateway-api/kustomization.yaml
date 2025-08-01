@@ -17,9 +17,3 @@ patches:
       - op: add
         path: /spec/values/sources/-
         value: gateway-tlsroute
-      - op: add
-        path: /spec/values/sources/-
-        value: gateway-tcproute
-      - op: add
-        path: /spec/values/sources/-
-        value: gateway-udproute
