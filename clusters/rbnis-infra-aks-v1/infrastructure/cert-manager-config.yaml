@@ -9,6 +9,8 @@ spec:
   path: ./infrastructure/config/cert-manager
   dependsOn:
     - name: cert-manager
+  components:
+    - components/secrets/sops
   prune: true
   sourceRef:
     kind: GitRepository
