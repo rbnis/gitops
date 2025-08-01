@@ -4,10 +4,5 @@ kind: Component
 resources:
   - crds
 
-patches:
-  - target:
-      group: helm.toolkit.fluxcd.io
-      version: v2
-      kind: HelmRelease
-      name: cilium
-    path: helmrelease.yaml
+patchesStrategicMerge:
+  - helmrelease.yaml
