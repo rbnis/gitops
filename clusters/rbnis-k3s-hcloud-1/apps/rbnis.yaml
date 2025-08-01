@@ -8,4 +8,6 @@ spec:
     kind: GitRepository
     name: flux-system
   path: ./apps/rbnis
+  components:
+    - components/gateway-api
   prune: true
