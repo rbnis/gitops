@@ -8,11 +8,29 @@ spec:
       namespace: infra
       sectionName: https
   hostnames:
-    - demo.rbn.is
+    - "rbn.is"
   rules:
     - backendRefs:
         - name: rbnis
           port: 80
+---
+apiVersion: gateway.networking.k8s.io/v1
+kind: HTTPRoute
+metadata:
+  name: rbnis-wildcard-filter-redirect
+spec:
+  parentRefs:
+    - name: shared-gateway
+      namespace: infra
+      sectionName: https
+  hostnames:
+    - "*.rbn.is"
+  rules:
+    - filters:
+        - type: RequestRedirect
+          requestRedirect:
+            hostname: rbn.is
+            statusCode: 302
 ---
 apiVersion: gateway.networking.k8s.io/v1
 kind: HTTPRoute
@@ -24,7 +42,8 @@ spec:
       namespace: infra
       sectionName: http
   hostnames:
-    - demo.rbn.is
+    - "rbn.is"
+    - "*.rbn.is"
   rules:
     - filters:
         - type: RequestRedirect
