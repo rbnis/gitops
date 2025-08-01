@@ -13,3 +13,8 @@ spec:
     - components/provider/hetzner
     - components/gateway-api
   prune: true
+  healthChecks:
+    - apiVersion: helm.toolkit.fluxcd.io/v2
+      kind: HelmRelease
+      name: cilium
+      namespace: kube-system
