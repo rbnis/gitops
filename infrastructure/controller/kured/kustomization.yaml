@@ -4,5 +4,6 @@ kind: Kustomization
 namespace: kured
 
 resources:
+  - namespace.yaml
   - helmrepository.yaml
   - helmrelease.yaml
