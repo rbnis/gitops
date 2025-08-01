@@ -3,5 +3,6 @@ kind: Kustomization
 
 resources:
   - crds.yaml
+  - kured.yaml
   - cilium.yaml
   - external-secrets.yaml
