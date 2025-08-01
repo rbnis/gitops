@@ -6,3 +6,4 @@ resources:
   - kured.yaml
   - cilium.yaml
   - external-secrets.yaml
+  - external-dns.yaml

@@ -7,6 +7,9 @@ metadata:
 spec:
   interval: 10m0s
   path: ./infrastructure/controller/external-dns
+  components:
+    - components/secrets/sops
+    - components/provider/azure
   dependsOn:
     - name: crds
   prune: true
