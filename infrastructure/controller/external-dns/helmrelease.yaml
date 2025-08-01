@@ -30,6 +30,7 @@ spec:
     policy: sync
     logFormat: json
     tolerations: []
+    extraArgs: []
     resources:
       requests:
         cpu: 10m

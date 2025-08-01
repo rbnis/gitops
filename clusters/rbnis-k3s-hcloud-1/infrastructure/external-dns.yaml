@@ -9,6 +9,7 @@ spec:
     name: flux-system
   path: ./infrastructure/controller/external-dns
   components:
+    - components/provider/hetzner
     - components/secrets/external
     - components/gateway-api
   postBuild:
