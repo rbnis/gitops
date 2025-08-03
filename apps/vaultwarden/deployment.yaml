@@ -55,7 +55,7 @@ spec:
             limits:
               memory: 150Mi
         - name: backup
-          image: ghcr.io/rbnis/vaultwarden-backup-sidecar:0.2.0
+          image: ghcr.io/rbnis/vaultwarden-backup-sidecar:0.3.0
           env:
             - name: CRON_SCHEDULE
               value: "13 * * * *"
