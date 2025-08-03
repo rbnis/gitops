@@ -1,0 +1,6 @@
+- op: replace
+  path: /spec/resources/requests/storage
+  value: 8Gi
+- op: replace
+  path: /spec/storageClassName
+  value: managed-csi

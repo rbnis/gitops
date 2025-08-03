@@ -8,7 +8,8 @@ spec:
   interval: 10m0s
   path: ./apps/vaultwarden
   components:
-    - components/aks
+    - components/provider/azure
+    - components/secrets/sops
     - components/ingress-nginx
   dependsOn:
     - name: crds
@@ -21,3 +22,7 @@ spec:
     provider: sops
     secretRef:
       name: sops-age
+  postBuild:
+    substituteFrom:
+      - kind: ConfigMap
+        name: cluster-settings
