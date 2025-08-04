@@ -3,3 +3,4 @@ kind: Kustomization
 
 resources:
   - rbnis.yaml
+  - vaultwarden.yaml
