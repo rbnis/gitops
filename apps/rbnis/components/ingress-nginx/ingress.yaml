@@ -1,9 +1,7 @@
----
 apiVersion: networking.k8s.io/v1
 kind: Ingress
 metadata:
   name: rbnis
-  namespace: rbnis
 spec:
   ingressClassName: nginx
   rules:
@@ -26,7 +24,6 @@ apiVersion: networking.k8s.io/v1
 kind: Ingress
 metadata:
   name: rbnis-wildcard
-  namespace: rbnis
   annotations:
     nginx.ingress.kubernetes.io/rewrite-target: https://rbn.is/$1$2
 spec:
