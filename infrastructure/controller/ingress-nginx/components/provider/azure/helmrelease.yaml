@@ -1,0 +1,7 @@
+- op: replace
+  path: /spec/values/controller/service
+  value:
+    annotations:
+      service.beta.kubernetes.io/azure-load-balancer-health-probe-request-path: /healthz
+    externalTrafficPolicy: Local
+    sessionAffinity: None
