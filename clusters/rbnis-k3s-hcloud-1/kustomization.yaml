@@ -8,3 +8,13 @@ resources:
   - cluster-settings.yaml
   - infrastructure
   - apps
+
+patches:
+  - target:
+      kind: GitRepository
+      name: flux-system
+      namespace: flux-system
+    patch: |
+      - op: replace
+        path: /spec/ref/branch
+        value: apps/observability/rework-lgtm
