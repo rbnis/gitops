@@ -1,0 +1,15 @@
+apiVersion: helm.toolkit.fluxcd.io/v2
+kind: HelmRelease
+metadata:
+  name: grafana
+spec:
+  values:
+    route:
+      main:
+        enabled: true
+        parentRefs:
+          - name: shared-gateway
+            namespace: infra
+            sectionName: https
+        hostnames:
+          - "grafana.rbn.is"

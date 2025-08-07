@@ -11,4 +11,5 @@ spec:
   components:
     - components/provider/hetzner
     - components/secrets/external
+    - components/gateway-api
   prune: true
