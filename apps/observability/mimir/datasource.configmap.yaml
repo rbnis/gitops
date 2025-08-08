@@ -18,3 +18,5 @@ data:
           httpMethod: POST
           prometheusType: Mimir
           prometheusVersion: 2.9.1
+          manageAlerts: false
+          allowAsRecordingRulesTarget: false
