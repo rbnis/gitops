@@ -42,6 +42,10 @@ spec:
             }
           }
 
+          discovery.kubernetes "nodes" {
+            role = "node"
+          }
+
           discovery.kubernetes "pods" {
             role = "pod"
             selectors {
@@ -70,11 +74,25 @@ spec:
           //TODO: Pods with scrape label
 
           // cAdvisor
-          prometheus.exporter.cadvisor "nodes" {
-            containerd_host = "/run/containerd/containerd.sock"
+          discovery.relabel "cadvisor" {
+            targets = discovery.kubernetes.nodes.targets
+
+            rule {
+              replacement   = "/metrics/cadvisor"
+              target_label  = "__metrics_path__"
+            }
           }
           prometheus.scrape "cadvisor" {
-            targets    = prometheus.exporter.cadvisor.nodes.targets
+            targets = discovery.relabel.cadvisor.output
+
+            job_name          = "integrations/kubernetes/cadvisor"
+            bearer_token_file = "/var/run/secrets/kubernetes.io/serviceaccount/token"
+
+            scheme = "https"
+            tls_config {
+              insecure_skip_verify = true
+            }
+
             forward_to = [ prometheus.remote_write.default.receiver ]
           }
 
