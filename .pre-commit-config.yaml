@@ -1,5 +1,4 @@
 
----
 fail_fast: true
 exclude: ^\.template\/.*$
 repos:

@@ -1,0 +1,30 @@
+target: all
+multitenancy_enabled: false
+
+server:
+  http_listen_port: 8080
+  grpc_listen_port: 9095
+
+blocks_storage:
+  backend: s3
+  s3:
+    endpoint: ${S3_ENDPOINT}
+    bucket_name: ${S3_BUCKET}
+    access_key_id: ${AWS_ACCESS_KEY_ID}
+    secret_access_key: ${AWS_SECRET_ACCESS_KEY}
+    send_content_md5: true
+
+  tsdb:
+    dir: /data/tsdb
+
+  bucket_store:
+    sync_dir: /data/tsdb-sync
+
+limits:
+  # Delete from storage metrics data older than 1 year.
+  compactor_blocks_retention_period: 1y
+
+memberlist:
+  bind_port: 7946
+  join_members:
+    - mimir-headless.${NAMESPACE}.svc.cluster.local
