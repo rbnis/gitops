@@ -17,7 +17,7 @@ spec:
       automountServiceAccountToken: false
       containers:
         - name: rbnis
-          image: ghcr.io/rbnis/rbn.is:2.6.4
+          image: ghcr.io/rbnis/rbn.is:2.6.5
           imagePullPolicy: IfNotPresent
           ports:
             - name: http
