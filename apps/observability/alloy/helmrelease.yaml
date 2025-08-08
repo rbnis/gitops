@@ -53,11 +53,11 @@ spec:
             targets = discovery.kubernetes.pods.targets
 
             rule {
-                source_labels = ["__meta_kubernetes_namespace"]
+                source_labels = [ "__meta_kubernetes_namespace" ]
                 target_label  = "namespace"
             }
             rule {
-                source_labels = ["__meta_kubernetes_pod_name"]
+                source_labels = [ "__meta_kubernetes_pod_name" ]
                 target_label  = "pod"
             }
           }
@@ -97,8 +97,15 @@ spec:
             procfs_path = "/host/proc"
             sysfs_path  = "/host/sys"
           }
+          discovery.relabel "nodeexporter" {
+            targets = prometheus.exporter.unix.nodes.targets
+            rule {
+              source_labels = [ "instance" ]
+              target_label = "nodename"
+            }
+          }
           prometheus.scrape "nodeexporter" {
-            targets    = prometheus.exporter.unix.nodes.targets
+            targets    = discovery.relabel.nodeexporter.output
             forward_to = [ prometheus.remote_write.default.receiver ]
           }
 
