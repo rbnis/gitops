@@ -3,19 +3,5 @@ kind: Component
 
 resources:
   - servicemonitor.yaml
-
-configMapGenerator:
-  - name: rbnis-overview-dashboard
-    files:
-      - rbnis-overview.json=dashboards/overview.json
-    options:
-      disableNameSuffixHash: true
-      labels:
-        grafana_dashboard: "1"
-  - name: rbnis-blackbox-alert
-    files:
-      - rbnis-blackbox.yaml=alerts/blackbox.yaml
-    options:
-      disableNameSuffixHash: true
-      labels:
-        grafana_alert: "1"
+  - alerts
+  - dashboards

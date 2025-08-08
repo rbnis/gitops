@@ -1,0 +1,16 @@
+apiVersion: kustomize.config.k8s.io/v1beta1
+kind: Kustomization
+
+namePrefix: dashboard-rbnis-
+generatorOptions:
+  disableNameSuffixHash: true
+  labels:
+    grafana_dashboard: "1"
+    kustomize.toolkit.fluxcd.io/substitute: disabled
+  annotations:
+    k8s-sidecar-target-directory: rbn.is
+
+configMapGenerator:
+  - name: overview
+    files:
+      - dashboard-rbnis-overview.json=overview.json
