@@ -7,6 +7,7 @@ generatorOptions:
 resources:
   - service.yaml
   - statefulset.yaml
+  - datasource.configmap.yaml
 
 configMapGenerator:
   - name: mimir-config
