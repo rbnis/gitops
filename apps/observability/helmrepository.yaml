@@ -5,3 +5,12 @@ metadata:
 spec:
   interval: 24h
   url: https://grafana.github.io/helm-charts
+---
+apiVersion: source.toolkit.fluxcd.io/v1
+kind: HelmRepository
+metadata:
+  name: prometheus-community
+spec:
+  interval: 24h
+  url: oci://ghcr.io/prometheus-community/charts
+  type: oci

@@ -78,6 +78,19 @@ spec:
             forward_to = [ prometheus.remote_write.default.receiver ]
           }
 
+          // kube-state-metrics
+          import.git "ksm" {
+            repository = "https://github.com/grafana/alloy-modules.git"
+            revision = "v0.2.11"
+            path = "modules/kubernetes/kube-state-metrics/metrics.alloy"
+            pull_frequency = "24h"
+          }
+          ksm.kubernetes "targets" {}
+          ksm.scrape "metrics" {
+            targets    = ksm.kubernetes.targets.output
+            forward_to = [ prometheus.remote_write.default.receiver ]
+          }
+
           // Node Exporter
           prometheus.exporter.unix "nodes" {
             rootfs_path = "/host/root"

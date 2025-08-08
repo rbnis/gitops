@@ -9,4 +9,5 @@ resources:
   - mimir
   - loki
   - grafana
+  - kube-state-metrics
   - alloy
