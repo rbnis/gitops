@@ -9,3 +9,4 @@ resources:
   - mimir
   - loki
   - grafana
+  - alloy

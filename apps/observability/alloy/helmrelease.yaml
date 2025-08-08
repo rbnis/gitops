@@ -1,0 +1,159 @@
+apiVersion: helm.toolkit.fluxcd.io/v2
+kind: HelmRelease
+metadata:
+  name: alloy
+spec:
+  interval: 30m
+  chart:
+    spec:
+      chart: alloy
+      version: 1.2.0
+      sourceRef:
+        kind: HelmRepository
+        name: grafana
+  driftDetection:
+    mode: enabled
+  install:
+    crds: CreateReplace
+  upgrade:
+    crds: CreateReplace
+  values:
+    crds:
+      create: true
+
+    alloy:
+      configMap:
+        create: true
+        content: |
+          logging {
+            level = "info"
+            format = "logfmt"
+          }
+
+          prometheus.remote_write "default" {
+            endpoint {
+              url = "http://mimir.observability.svc.cluster.local:8080/api/v1/push"
+            }
+          }
+
+          loki.write "default" {
+            endpoint {
+              url = "http://loki.observability.svc.cluster.local:3100/loki/api/v1/push"
+            }
+          }
+
+          discovery.kubernetes "pods" {
+            role = "pod"
+            selectors {
+              role = "pod"
+              field = "spec.nodeName=" + coalesce(sys.env("HOSTNAME"), constants.hostname)
+            }
+          }
+          discovery.relabel "pods" {
+            targets = discovery.kubernetes.pods.targets
+
+            rule {
+                source_labels = ["__meta_kubernetes_namespace"]
+                target_label  = "namespace"
+            }
+            rule {
+                source_labels = ["__meta_kubernetes_pod_name"]
+                target_label  = "pod"
+            }
+          }
+
+          // Service Monitors
+          prometheus.operator.servicemonitors "services" {
+            forward_to = [ prometheus.remote_write.default.receiver ]
+          }
+
+          //TODO: Pods with scrape label
+
+          // cAdvisor
+          prometheus.exporter.cadvisor "nodes" {
+            containerd_host = "/run/containerd/containerd.sock"
+          }
+          prometheus.scrape "cadvisor" {
+            targets    = prometheus.exporter.cadvisor.nodes.targets
+            forward_to = [ prometheus.remote_write.default.receiver ]
+          }
+
+          // Node Exporter
+          prometheus.exporter.unix "nodes" {
+            rootfs_path = "/host/root"
+            procfs_path = "/host/proc"
+            sysfs_path  = "/host/sys"
+          }
+          prometheus.scrape "nodeexporter" {
+            targets    = prometheus.exporter.unix.nodes.targets
+            forward_to = [ prometheus.remote_write.default.receiver ]
+          }
+
+          // Logs
+          loki.source.kubernetes "pods" {
+            targets    = discovery.relabel.pods.output
+            forward_to = [ loki.write.default.receiver ]
+          }
+
+          // Kubernetes Events
+          loki.source.kubernetes_events "kubernetes" {
+            log_format = "json"
+            forward_to = [ loki.write.default.receiver ]
+          }
+
+      mounts:
+        extra:
+          - name: rootfs
+            mountPath: /host/root
+            readOnly: true
+          - name: procfs
+            mountPath: /host/proc
+            readOnly: true
+          - name: sysfs
+            mountPath: /host/sys
+            readOnly: true
+          - name: containerd-socket
+            mountPath: /run/containerd/containerd.sock
+            readOnly: true
+
+    #   securityContext:
+    #     runAsUser: 473
+    #     runAsGroup: 473
+
+    # configReloader:
+    #   securityContext:
+    #     # this is the UID of the "nobody" user that the configReloader image runs as
+    #     runAsUser: 65534
+    #     runAsGroup: 65534
+
+    controller:
+      tolerations:
+        - effect: NoSchedule
+          operator: Exists
+        - key: CriticalAddonsOnly
+          operator: Exists
+        - effect: NoExecute
+          operator: Exists
+
+      volumes:
+        extra:
+          - name: rootfs
+            hostPath:
+              path: /
+          - name: procfs
+            hostPath:
+              path: /proc
+          - name: sysfs
+            hostPath:
+              path: /sys
+          - name: containerd-socket
+            hostPath:
+              path: /run/k3s/containerd/containerd.sock
+
+      resources:
+        requests:
+          cpu: 100m
+          memory: 128Mi
+        limits:
+          cpu: 500m
+          memory: 512Mi
