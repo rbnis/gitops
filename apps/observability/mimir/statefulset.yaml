@@ -6,7 +6,6 @@ metadata:
     app.kubernetes.io/name: mimir
 spec:
   replicas: 2
-  serviceName: mimir
   selector:
     matchLabels:
       app.kubernetes.io/name: mimir
@@ -64,6 +63,7 @@ spec:
         - name: config
           configMap:
             name: mimir-config
+
   volumeClaimTemplates:
     - metadata:
         name: mimir-data
