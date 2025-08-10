@@ -19,3 +19,23 @@ spec:
     crds: CreateReplace
   values:
     installCRDs: true
+    resources:
+      requests:
+        cpu: 10m
+        memory: 50Mi
+      limits:
+        memory: 50Mi
+    certController:
+      resources:
+        requests:
+          cpu: 10m
+          memory: 75Mi
+        limits:
+          memory: 75Mi
+    webhook:
+      resources:
+        requests:
+          cpu: 10m
+          memory: 50Mi
+        limits:
+          memory: 50Mi
