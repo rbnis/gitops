@@ -197,6 +197,13 @@ spec:
             mountPath: /run/containerd/containerd.sock
             readOnly: true
 
+      resources:
+        requests:
+          cpu: 50m
+          memory: 350Mi
+        limits:
+          memory: 350Mi
+
     #   securityContext:
     #     runAsUser: 473
     #     runAsGroup: 473
@@ -231,10 +238,10 @@ spec:
             hostPath:
               path: /run/k3s/containerd/containerd.sock
 
+    configReloader:
       resources:
         requests:
-          cpu: 100m
-          memory: 128Mi
+          cpu: 10m
+          memory: 25Mi
         limits:
-          cpu: 500m
-          memory: 512Mi
+          memory: 25Mi
