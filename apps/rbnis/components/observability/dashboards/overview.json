@@ -18,6 +18,7 @@
   "editable": true,
   "fiscalYearStartMonth": 0,
   "graphTooltip": 2,
+  "id": 11,
   "links": [],
   "panels": [
     {
@@ -36,7 +37,7 @@
     {
       "datasource": {
         "type": "prometheus",
-        "uid": "prometheus"
+        "uid": "${DS_PROMETHEUS}"
       },
       "fieldConfig": {
         "defaults": {
@@ -66,7 +67,7 @@
             "steps": [
               {
                 "color": "red",
-                "value": null
+                "value": 0
               },
               {
                 "color": "green",
@@ -101,12 +102,12 @@
         "textMode": "auto",
         "wideLayout": true
       },
-      "pluginVersion": "11.1.3",
+      "pluginVersion": "12.1.0",
       "targets": [
         {
           "datasource": {
             "type": "prometheus",
-            "uid": "prometheus"
+            "uid": "${DS_PROMETHEUS}"
           },
           "editorMode": "code",
           "expr": "avg(probe_success{instance=\"https://rbn.is\"})",
@@ -122,7 +123,7 @@
     {
       "datasource": {
         "type": "prometheus",
-        "uid": "prometheus"
+        "uid": "${DS_PROMETHEUS}"
       },
       "description": "",
       "fieldConfig": {
@@ -138,7 +139,7 @@
             "steps": [
               {
                 "color": "red",
-                "value": null
+                "value": 0
               },
               {
                 "color": "#EAB839",
@@ -178,12 +179,12 @@
         "textMode": "auto",
         "wideLayout": true
       },
-      "pluginVersion": "11.1.3",
+      "pluginVersion": "12.1.0",
       "targets": [
         {
           "datasource": {
             "type": "prometheus",
-            "uid": "prometheus"
+            "uid": "${DS_PROMETHEUS}"
           },
           "editorMode": "code",
           "expr": "(probe_ssl_earliest_cert_expiry{instance=\"https://rbn.is\"} - time()) / 86400",
@@ -199,7 +200,7 @@
     {
       "datasource": {
         "type": "loki",
-        "uid": "P8E80F9AEF21F6940"
+        "uid": "${DS_LOKI}"
       },
       "description": "Users differentiated by User-Agent and IP",
       "fieldConfig": {
@@ -213,7 +214,7 @@
             "steps": [
               {
                 "color": "green",
-                "value": null
+                "value": 0
               }
             ]
           },
@@ -245,15 +246,16 @@
         "textMode": "auto",
         "wideLayout": true
       },
-      "pluginVersion": "11.1.3",
+      "pluginVersion": "12.1.0",
       "targets": [
         {
           "datasource": {
             "type": "loki",
-            "uid": "P8E80F9AEF21F6940"
+            "uid": "${DS_LOKI}"
           },
+          "direction": "backward",
           "editorMode": "code",
-          "expr": "count(count by (http_user_agent, http_x_forwarded_for) (count_over_time({job=\"rbnis/rbnis\"} | json | __error__ != `JSONParserErr` | http_user_agent !~ \"kube-probe/1.30|Blackbox Exporter/0.25.0|Googlebot|InternetMeasurement|facebookexternalhit|SemrushBot|meta-externalagent|AhrefsBot|bingbot|PetalBot|GPTBot|Applebot|TelegramBot|TwitterBot|MJ12bot|ZoominfoBot\" [$__range])))",
+          "expr": "count(count by (http_user_agent, http_x_forwarded_for) (count_over_time({namespace=\"rbnis\"} | json | __error__ != `JSONParserErr` | http_user_agent !~ \"kube-probe/1.30|Blackbox Exporter/0.25.0|Googlebot|InternetMeasurement|facebookexternalhit|SemrushBot|meta-externalagent|AhrefsBot|bingbot|PetalBot|GPTBot|Applebot|TelegramBot|TwitterBot|MJ12bot|ZoominfoBot\" [$__range])))",
           "queryType": "range",
           "refId": "A"
         }
@@ -277,7 +279,7 @@
     {
       "datasource": {
         "type": "prometheus",
-        "uid": "prometheus"
+        "uid": "${DS_PROMETHEUS}"
       },
       "fieldConfig": {
         "defaults": {
@@ -293,6 +295,7 @@
             "axisPlacement": "auto",
             "axisSoftMin": 0.95,
             "barAlignment": 0,
+            "barWidthFactor": 0.6,
             "drawStyle": "line",
             "fillOpacity": 0,
             "gradientMode": "scheme",
@@ -302,7 +305,7 @@
               "viz": false
             },
             "insertNulls": false,
-            "lineInterpolation": "linear",
+            "lineInterpolation": "smooth",
             "lineStyle": {
               "fill": "solid"
             },
@@ -330,7 +333,7 @@
             "steps": [
               {
                 "color": "red",
-                "value": null
+                "value": 0
               },
               {
                 "color": "#EAB839",
@@ -347,34 +350,36 @@
         "overrides": []
       },
       "gridPos": {
-        "h": 8,
+        "h": 6,
         "w": 8,
         "x": 0,
         "y": 5
       },
-      "id": 2,
+      "id": 14,
       "options": {
         "legend": {
           "calcs": [
-            "mean"
+            "lastNotNull"
           ],
           "displayMode": "table",
           "placement": "bottom",
-          "showLegend": true
+          "showLegend": false
         },
         "tooltip": {
+          "hideZeros": false,
           "mode": "single",
           "sort": "none"
         }
       },
+      "pluginVersion": "12.1.0",
       "targets": [
         {
           "datasource": {
             "type": "prometheus",
-            "uid": "prometheus"
+            "uid": "${DS_PROMETHEUS}"
           },
           "editorMode": "code",
-          "expr": "sum(rate(nginx_ingress_controller_requests{exported_namespace=\"rbnis\",status!~\"[4].*\"}[2m])) by (ingress) / sum(rate(nginx_ingress_controller_requests{exported_namespace=\"rbnis\"}[2m])) by (ingress)",
+          "expr": "sum(rate(hubble_http_requests_total{destination_workload=\"rbnis\",status!~\"[45].*\"}[1m])) / sum(rate(hubble_http_requests_total{destination_workload=\"rbnis\"}[1m]))",
           "hide": false,
           "instant": false,
           "legendFormat": "4xx",
@@ -384,11 +389,11 @@
         {
           "datasource": {
             "type": "prometheus",
-            "uid": "prometheus"
+            "uid": "${DS_PROMETHEUS}"
           },
           "editorMode": "code",
-          "expr": "sum(rate(nginx_ingress_controller_requests{exported_namespace=\"rbnis\",status!~\"[5].*\"}[2m])) by (ingress) / sum(rate(nginx_ingress_controller_requests{exported_namespace=\"rbnis\"}[2m])) by (ingress)",
-          "hide": false,
+          "expr": "sum(rate(hubble_http_requests_total{destination_workload=\"rbnis\",status!~\"[5].*\"}[1m])) / sum(rate(hubble_http_requests_total{destination_workload=\"rbnis\"}[1m]))",
+          "hide": true,
           "instant": false,
           "legendFormat": "5xx",
           "range": true,
@@ -401,7 +406,7 @@
     {
       "datasource": {
         "type": "prometheus",
-        "uid": "prometheus"
+        "uid": "beubjhhx40qv4a"
       },
       "fieldConfig": {
         "defaults": {
@@ -415,6 +420,7 @@
             "axisLabel": "",
             "axisPlacement": "auto",
             "barAlignment": 0,
+            "barWidthFactor": 0.6,
             "drawStyle": "line",
             "fillOpacity": 10,
             "gradientMode": "none",
@@ -424,7 +430,7 @@
               "viz": false
             },
             "insertNulls": false,
-            "lineInterpolation": "linear",
+            "lineInterpolation": "smooth",
             "lineWidth": 2,
             "pointSize": 5,
             "scaleDistribution": {
@@ -446,7 +452,7 @@
             "steps": [
               {
                 "color": "green",
-                "value": null
+                "value": 0
               },
               {
                 "color": "red",
@@ -459,7 +465,7 @@
         "overrides": []
       },
       "gridPos": {
-        "h": 8,
+        "h": 6,
         "w": 8,
         "x": 8,
         "y": 5
@@ -474,13 +480,15 @@
           ],
           "displayMode": "table",
           "placement": "bottom",
-          "showLegend": true
+          "showLegend": false
         },
         "tooltip": {
+          "hideZeros": false,
           "mode": "single",
           "sort": "none"
         }
       },
+      "pluginVersion": "12.1.0",
       "targets": [
         {
           "datasource": {
@@ -488,7 +496,7 @@
             "uid": "prometheus"
           },
           "editorMode": "code",
-          "expr": "round(sum(irate(nginx_ingress_controller_requests{exported_namespace=\"rbnis\"}[2m])) by (ingress), 0.001)",
+          "expr": "round(sum(irate(hubble_http_requests_total{destination_workload=\"rbnis\"}[1m])), 0.001)",
           "instant": false,
           "legendFormat": "__auto",
           "range": true,
@@ -501,7 +509,7 @@
     {
       "datasource": {
         "type": "prometheus",
-        "uid": "prometheus"
+        "uid": "beubjhhx40qv4a"
       },
       "fieldConfig": {
         "defaults": {
@@ -515,6 +523,7 @@
             "axisLabel": "",
             "axisPlacement": "auto",
             "barAlignment": 0,
+            "barWidthFactor": 0.6,
             "drawStyle": "line",
             "fillOpacity": 0,
             "gradientMode": "none",
@@ -524,7 +533,7 @@
               "viz": false
             },
             "insertNulls": false,
-            "lineInterpolation": "linear",
+            "lineInterpolation": "smooth",
             "lineWidth": 2,
             "pointSize": 5,
             "scaleDistribution": {
@@ -547,7 +556,7 @@
             "steps": [
               {
                 "color": "green",
-                "value": null
+                "value": 0
               },
               {
                 "color": "#EAB839",
@@ -564,7 +573,7 @@
         "overrides": []
       },
       "gridPos": {
-        "h": 8,
+        "h": 6,
         "w": 8,
         "x": 16,
         "y": 5
@@ -579,13 +588,15 @@
           ],
           "displayMode": "table",
           "placement": "bottom",
-          "showLegend": true
+          "showLegend": false
         },
         "tooltip": {
+          "hideZeros": false,
           "mode": "single",
           "sort": "none"
         }
       },
+      "pluginVersion": "12.1.0",
       "targets": [
         {
           "datasource": {
@@ -593,7 +604,7 @@
             "uid": "prometheus"
           },
           "editorMode": "code",
-          "expr": "sum (\n  rate (\n      nginx_ingress_controller_request_duration_seconds_sum{exported_namespace=\"rbnis\"}[1m]\n  )\n) by (host) / sum (\n  rate(\n      nginx_ingress_controller_request_duration_seconds_count{exported_namespace=\"rbnis\"}[1m]\n  )\n) by (host)",
+          "expr": "sum (\n  rate (\n      hubble_http_request_duration_seconds_sum{destination_workload=\"rbnis\"}[1m]\n  )\n) / sum (\n  rate(\n      hubble_http_request_duration_seconds_count{destination_workload=\"rbnis\"}[1m]\n  )\n)",
           "instant": false,
           "legendFormat": "__auto",
           "range": true,
@@ -609,7 +620,7 @@
         "h": 1,
         "w": 24,
         "x": 0,
-        "y": 13
+        "y": 11
       },
       "id": 9,
       "panels": [],
@@ -619,7 +630,7 @@
     {
       "datasource": {
         "type": "prometheus",
-        "uid": "prometheus"
+        "uid": "${DS_PROMETHEUS}"
       },
       "fieldConfig": {
         "defaults": {
@@ -633,6 +644,7 @@
             "axisLabel": "",
             "axisPlacement": "auto",
             "barAlignment": 0,
+            "barWidthFactor": 0.6,
             "drawStyle": "line",
             "fillOpacity": 0,
             "gradientMode": "none",
@@ -642,7 +654,7 @@
               "viz": false
             },
             "insertNulls": false,
-            "lineInterpolation": "linear",
+            "lineInterpolation": "smooth",
             "lineWidth": 2,
             "pointSize": 5,
             "scaleDistribution": {
@@ -664,7 +676,7 @@
             "steps": [
               {
                 "color": "green",
-                "value": null
+                "value": 0
               },
               {
                 "color": "#EAB839",
@@ -741,7 +753,7 @@
         "h": 8,
         "w": 12,
         "x": 0,
-        "y": 14
+        "y": 12
       },
       "id": 10,
       "options": {
@@ -754,15 +766,17 @@
           "showLegend": true
         },
         "tooltip": {
+          "hideZeros": false,
           "mode": "single",
           "sort": "none"
         }
       },
+      "pluginVersion": "12.1.0",
       "targets": [
         {
           "datasource": {
             "type": "prometheus",
-            "uid": "prometheus"
+            "uid": "${DS_PROMETHEUS}"
           },
           "editorMode": "code",
           "expr": "avg(1 / sum(kube_pod_container_resource_requests{namespace=\"rbnis\", resource=\"cpu\"}) by (pod)\n* (sum(irate(container_cpu_usage_seconds_total{namespace=\"rbnis\"}[2m])) by (pod) / 2)) ",
@@ -774,7 +788,7 @@
         {
           "datasource": {
             "type": "prometheus",
-            "uid": "prometheus"
+            "uid": "${DS_PROMETHEUS}"
           },
           "editorMode": "code",
           "expr": "sum(increase(container_cpu_cfs_throttled_periods_total{job=\"kubelet\", metrics_path=\"/metrics/cadvisor\", namespace=\"rbnis\", container!=\"\"}[$__rate_interval])) by (namespace) /sum(increase(container_cpu_cfs_periods_total{job=\"kubelet\", metrics_path=\"/metrics/cadvisor\", namespace=\"rbnis\", container!=\"\"}[$__rate_interval])) by (namespace)",
@@ -787,7 +801,7 @@
         {
           "datasource": {
             "type": "prometheus",
-            "uid": "prometheus"
+            "uid": "${DS_PROMETHEUS}"
           },
           "editorMode": "code",
           "expr": "kube_horizontalpodautoscaler_spec_target_metric{namespace=\"rbnis\"} / 100",
@@ -804,7 +818,7 @@
     {
       "datasource": {
         "type": "prometheus",
-        "uid": "prometheus"
+        "uid": "${DS_PROMETHEUS}"
       },
       "fieldConfig": {
         "defaults": {
@@ -818,6 +832,7 @@
             "axisLabel": "",
             "axisPlacement": "auto",
             "barAlignment": 0,
+            "barWidthFactor": 0.6,
             "drawStyle": "line",
             "fillOpacity": 0,
             "gradientMode": "none",
@@ -827,7 +842,7 @@
               "viz": false
             },
             "insertNulls": false,
-            "lineInterpolation": "linear",
+            "lineInterpolation": "smooth",
             "lineWidth": 2,
             "pointSize": 5,
             "scaleDistribution": {
@@ -849,7 +864,7 @@
             "steps": [
               {
                 "color": "green",
-                "value": null
+                "value": 0
               },
               {
                 "color": "#EAB839",
@@ -869,7 +884,7 @@
         "h": 8,
         "w": 12,
         "x": 12,
-        "y": 14
+        "y": 12
       },
       "id": 11,
       "options": {
@@ -882,15 +897,17 @@
           "showLegend": true
         },
         "tooltip": {
+          "hideZeros": false,
           "mode": "single",
           "sort": "none"
         }
       },
+      "pluginVersion": "12.1.0",
       "targets": [
         {
           "datasource": {
             "type": "prometheus",
-            "uid": "prometheus"
+            "uid": "${DS_PROMETHEUS}"
           },
           "editorMode": "code",
           "expr": "1 / sum(kube_pod_container_resource_requests{namespace=\"rbnis\", resource=\"cpu\"}) by (pod)\n* (sum(irate(container_cpu_usage_seconds_total{namespace=\"rbnis\"}[2m])) by (pod) / 2)",
@@ -909,7 +926,7 @@
         "h": 1,
         "w": 24,
         "x": 0,
-        "y": 22
+        "y": 20
       },
       "id": 12,
       "panels": [],
@@ -919,7 +936,7 @@
     {
       "datasource": {
         "type": "prometheus",
-        "uid": "prometheus"
+        "uid": "${DS_PROMETHEUS}"
       },
       "fieldConfig": {
         "defaults": {
@@ -940,7 +957,7 @@
             "steps": [
               {
                 "color": "green",
-                "value": null
+                "value": 0
               },
               {
                 "color": "red",
@@ -978,7 +995,7 @@
                   "steps": [
                     {
                       "color": "red",
-                      "value": null
+                      "value": 0
                     },
                     {
                       "color": "orange",
@@ -1011,7 +1028,7 @@
         "h": 5,
         "w": 24,
         "x": 0,
-        "y": 23
+        "y": 21
       },
       "id": 4,
       "options": {
@@ -1026,12 +1043,12 @@
         },
         "showHeader": true
       },
-      "pluginVersion": "11.1.3",
+      "pluginVersion": "12.1.0",
       "targets": [
         {
           "datasource": {
             "type": "prometheus",
-            "uid": "prometheus"
+            "uid": "${DS_PROMETHEUS}"
           },
           "editorMode": "code",
           "expr": "avg(nginx_ingress_controller_ssl_expire_time_seconds{host=~\"rbn.is|\\\\*.rbn.is\"}) by (host) - time()",
@@ -1055,13 +1072,45 @@
       "type": "table"
     }
   ],
+  "preload": false,
   "refresh": "30s",
-  "schemaVersion": 39,
+  "schemaVersion": 41,
   "tags": [
     "rbn.is"
   ],
   "templating": {
-    "list": []
+    "list": [
+      {
+        "allowCustomValue": false,
+        "current": {
+          "text": "Mimir",
+          "value": "beubjhhx40qv4a"
+        },
+        "hide": 2,
+        "label": "Data Source",
+        "name": "DS_PROMETHEUS",
+        "options": [],
+        "query": "prometheus",
+        "refresh": 1,
+        "regex": "",
+        "type": "datasource"
+      },
+      {
+        "allowCustomValue": false,
+        "current": {
+          "text": "Loki",
+          "value": "aeubjafghe7swc"
+        },
+        "hide": 2,
+        "label": "Data Source",
+        "name": "DS_LOKI",
+        "options": [],
+        "query": "loki",
+        "refresh": 1,
+        "regex": "",
+        "type": "datasource"
+      }
+    ]
   },
   "time": {
     "from": "now-6h",
@@ -1071,6 +1120,6 @@
   "timezone": "browser",
   "title": "rbn.is - Overview",
   "uid": "da686069-18b4-42b2-a194-f7407b86d0d4",
-  "version": 7,
+  "version": 8,
   "weekStart": ""
 }
