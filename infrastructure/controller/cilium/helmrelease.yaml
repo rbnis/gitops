@@ -21,6 +21,11 @@ spec:
     egressGateway:
       enabled: false
 
+    prometheus:
+      enabled: true
+      serviceMonitor:
+        enabled: true
+
     resources:
       requests:
         cpu: 50m
@@ -30,6 +35,10 @@ spec:
 
     operator:
       replicas: 1
+      prometheus:
+        enabled: true
+        serviceMonitor:
+          enabled: true
       resources:
         requests:
           cpu: 10m
@@ -56,14 +65,22 @@ spec:
           - port-distribution
           - icmp
           - http
+        serviceMonitor:
+          enabled: true
+
       relay:
         enabled: true
+        prometheus:
+          enabled: true
+          serviceMonitor:
+            enabled: true
         resources:
           requests:
             cpu: 10m
             memory: 50Mi
           limits:
             memory: 50Mi
+
       ui:
         enabled: true
         frontend:
