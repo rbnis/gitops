@@ -9,6 +9,7 @@ spec:
   selector:
     matchLabels:
       app.kubernetes.io/name: mimir
+  serviceName: mimir
   template:
     metadata:
       labels:
@@ -54,6 +55,16 @@ spec:
               memory: 768Mi
             limits:
               memory: 768Mi
+          readinessProbe:
+            httpGet:
+              path: /ready
+              port: http
+            initialDelaySeconds: 45
+          livenessProbe:
+            httpGet:
+              path: /ready
+              port: http
+            initialDelaySeconds: 45
           volumeMounts:
             - name: config
               mountPath: /etc/mimir
