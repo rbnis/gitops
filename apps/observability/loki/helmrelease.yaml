@@ -84,6 +84,14 @@ spec:
       podDisruptionBudget:
         maxUnavailable: 1
 
+    sidecar:
+      resources:
+        requests:
+          cpu: 10m
+          memory: 128Mi
+        limits:
+          memory: 128Mi
+
     lokiCanary:
       resources:
         requests:
@@ -101,21 +109,28 @@ spec:
           memory: 25Mi
 
     chunksCache:
-      allocatedMemory: 512
-      resources:
-        requests:
-          cpu: 10m
-          memory: 50Mi
-        limits:
-          memory: 50Mi
-    resultsCache:
       allocatedMemory: 256
       resources:
         requests:
           cpu: 10m
-          memory: 25Mi
+          memory: 300Mi
         limits:
-          memory: 25Mi
+          memory: 300Mi
+    resultsCache:
+      allocatedMemory: 128
+      resources:
+        requests:
+          cpu: 10m
+          memory: 150Mi
+        limits:
+          memory: 150Mi
+    memcachedExporter:
+      resources:
+        requests:
+          cpu: 5m
+          memory: 20Mi
+        limits:
+          memory: 20Mi
 
     # Zero out replica counts of other deployment modes
     backend:
