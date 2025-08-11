@@ -53,9 +53,9 @@ spec:
     resources:
       requests:
         cpu: 25m
-        memory: 200Mi
+        memory: 256Mi
       limits:
-        memory: 200Mi
+        memory: 256Mi
 
     sidecar:
       datasources:
@@ -78,7 +78,7 @@ spec:
         searchNamespace: ALL
       resources:
         requests:
-          cpu: 10m
+          cpu: 5m
           memory: 150Mi
         limits:
           memory: 150Mi
