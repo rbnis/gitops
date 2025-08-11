@@ -59,12 +59,12 @@ spec:
             httpGet:
               path: /ready
               port: http
-            initialDelaySeconds: 45
+            initialDelaySeconds: 60
           livenessProbe:
             httpGet:
               path: /ready
               port: http
-            initialDelaySeconds: 45
+            initialDelaySeconds: 60
           volumeMounts:
             - name: config
               mountPath: /etc/mimir
