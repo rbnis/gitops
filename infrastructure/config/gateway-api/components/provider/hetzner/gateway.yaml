@@ -7,5 +7,5 @@ spec:
     annotations:
       load-balancer.hetzner.cloud/location: ${cluster_primary_location}
       load-balancer.hetzner.cloud/use-private-ip: "true"
-      load-balancer.hetzner.cloud/uses-proxyprotocol: "false"
+      load-balancer.hetzner.cloud/uses-proxyprotocol: "true"
       load-balancer.hetzner.cloud/http-redirect-https: "false"
