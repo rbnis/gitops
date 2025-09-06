@@ -24,7 +24,7 @@ spec:
           whenUnsatisfiable: ScheduleAnyway
       containers:
         - name: mimir
-          image: grafana/mimir:2.17.0
+          image: grafana/mimir:2.17.1
           args:
             - "-config.file=/etc/mimir/mimir.yaml"
             - "-config.expand-env=true"
