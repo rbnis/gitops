@@ -1,0 +1,20 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: handlich
+  labels:
+    app.kubernetes.io/name: handlich
+data:
+  config.yaml: |
+    logLevel: info
+    backend:
+      type: file
+      file:
+        mode: read-only
+        path: /config/redirects.yaml
+  redirects.yaml: |
+    redirects:
+      - short: anne-30-zusage
+        long: https://forms.gle/C3Penu3QJodTVLX1A
+      - short: anne-30-mitbringsel
+        long: https://docs.google.com/spreadsheets/d/1zj7thVK6RLpsexd3rbjDhuv6R468DIkwooCL-Ln4KT8/edit

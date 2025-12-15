@@ -11,5 +11,5 @@ spec:
     - "url.rbn.is"
   rules:
     - backendRefs:
-        - name: rbnis
+        - name: handlich
           port: 80

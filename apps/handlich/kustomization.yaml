@@ -6,5 +6,6 @@ namespace: handlich
 resources:
   - namespace.yaml
   - service.yaml
+  - configmap.yaml
   - deployment.yaml
   - poddisruptionbudget.yaml
