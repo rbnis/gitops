@@ -24,11 +24,16 @@ spec:
       automountServiceAccountToken: false
       containers:
         - name: handlich
-          image: ghcr.io/rbnis/handlich:0.1.1
+          image: ghcr.io/rbnis/handlich:0.1.3
           imagePullPolicy: IfNotPresent
+          args: ["--config", "/config/config.yaml"]
           ports:
             - name: http
               containerPort: 8080
+          volumeMounts:
+            - name: config
+              mountPath: "/config"
+              readOnly: true
           resources:
             requests:
               cpu: 25m
@@ -47,4 +52,8 @@ spec:
             runAsUser: 101
             runAsGroup: 101
             fsGroup: 101
+      volumes:
+        - name: config
+          configMap:
+            name: handlich
       tolerations: []
