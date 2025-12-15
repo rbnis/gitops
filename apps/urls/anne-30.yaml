@@ -17,7 +17,6 @@ spec:
         - type: RequestRedirect
           requestRedirect:
             statusCode: 302
-            scheme: https
             hostname: forms.gle
             path:
               type: ReplaceFullPath
@@ -29,8 +28,7 @@ spec:
         - type: RequestRedirect
           requestRedirect:
             statusCode: 302
-            scheme: https
             hostname: docs.google.com
             path:
               type: ReplaceFullPath
-              replaceFullPath: spreadsheets/d/1zj7thVK6RLpsexd3rbjDhuv6R468DIkwooCL-Ln4KT8/edit?usp=sharing
+              replaceFullPath: /spreadsheets/d/1zj7thVK6RLpsexd3rbjDhuv6R468DIkwooCL-Ln4KT8/edit
