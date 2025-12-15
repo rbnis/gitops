@@ -1,0 +1,15 @@
+apiVersion: gateway.networking.k8s.io/v1
+kind: HTTPRoute
+metadata:
+  name: handlich
+spec:
+  parentRefs:
+    - name: shared-gateway
+      namespace: infra
+      sectionName: https
+  hostnames:
+    - "url.rbn.is"
+  rules:
+    - backendRefs:
+        - name: rbnis
+          port: 80

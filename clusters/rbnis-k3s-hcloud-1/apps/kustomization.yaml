@@ -4,5 +4,5 @@ kind: Kustomization
 resources:
   - observability.yaml
   - rbnis.yaml
+  - handlich.yaml
   - vaultwarden.yaml
-  - urls.yaml
