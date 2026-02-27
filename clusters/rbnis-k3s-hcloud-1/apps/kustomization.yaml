@@ -5,5 +5,4 @@ resources:
   - observability.yaml
   - identity-provider.yaml
   - rbnis.yaml
-  - handlich.yaml
   - vaultwarden.yaml
