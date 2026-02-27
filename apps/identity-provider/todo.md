@@ -1,0 +1,6 @@
+- [x] Generate database passwords
+- [ ] add deployment, service, ... for lldap
+- [ ] add deployment, service, ... for authelia
+- [ ] add httproute, tcproute for lldap
+- [ ] add httproute for authelia
+- [ ] backup database cluster to backblaze
