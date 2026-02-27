@@ -1,0 +1,33 @@
+apiVersion: helm.toolkit.fluxcd.io/v2
+kind: HelmRelease
+metadata:
+  name: kaniop
+spec:
+  interval: 30m
+  chart:
+    spec:
+      chart: kaniop
+      sourceRef:
+        kind: HelmRepository
+        name: kaniop
+      version: "0.5.2"
+  driftDetection:
+    mode: enabled
+  install:
+    crds: CreateReplace
+  upgrade:
+    crds: CreateReplace
+  values:
+    metrics:
+      enabled: true
+      serviceMonitor:
+        enabled: true
+      dashboards:
+        enabled: true
+
+    resources:
+      requests:
+        cpu: 50m
+        memory: 75Mi
+      limits:
+        memory: 75Mi
