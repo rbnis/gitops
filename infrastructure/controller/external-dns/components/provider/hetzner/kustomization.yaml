@@ -3,8 +3,9 @@ kind: Component
 
 patches:
   - target:
-      group: helm.toolkit.fluxcd.io
-      version: v2
       kind: HelmRelease
       name: external-dns
-    path: helmrelease.yaml
+    patch: |
+      - op: add
+        path: /spec/values/extraArgs/-
+        value: --exclude-target-net=10.0.0.0/16
