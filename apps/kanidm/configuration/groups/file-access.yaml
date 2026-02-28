@@ -1,0 +1,12 @@
+apiVersion: kaniop.rs/v1beta1
+kind: KanidmGroup
+metadata:
+  name: file-access
+spec:
+  kanidmRef:
+    name: rbnis
+
+  members:
+  - robin
+
+  posixAttributes: {}

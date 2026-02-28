@@ -1,0 +1,12 @@
+apiVersion: kaniop.rs/v1beta1
+kind: KanidmPersonAccount
+metadata:
+  name: robin
+spec:
+  kanidmRef:
+    name: rbnis
+  personAttributes:
+    displayname: Robin Tripp
+    mail:
+      - robin@rbn.is
+  posixAttributes: {}

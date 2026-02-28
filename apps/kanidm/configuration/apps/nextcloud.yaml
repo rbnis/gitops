@@ -1,0 +1,19 @@
+apiVersion: kaniop.rs/v1beta1
+kind: KanidmOAuth2Client
+metadata:
+  name: nextcloud
+spec:
+  kanidmRef:
+    name: rbnis
+
+  displayname: Nextcloud
+  origin: https://files.rbn.is
+  redirectUrl:
+    - https://files.rbn.is/apps/user_oidc/code
+
+  scopeMap:
+    - group: nextcloud-access
+      scopes:
+        - openid
+        - email
+        - groups
