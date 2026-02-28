@@ -4,6 +4,7 @@ kind: Kustomization
 resources:
   - crds.yaml
   - kured.yaml
+  - kgateway.yaml
   - gateway-api.yaml
   - external-secrets.yaml
   - external-dns.yaml
