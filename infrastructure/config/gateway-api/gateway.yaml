@@ -14,7 +14,7 @@ spec:
       from: Selector
       selector:
         matchLabels:
-          gateway.infra.rbn.is/attach-listener: "true"
+          gateway.k8s.rbn.is/attach-listener: "true"
   listeners:
     - name: http
       protocol: HTTP
@@ -24,7 +24,7 @@ spec:
           from: Selector
           selector:
             matchLabels:
-              gateway.infra.rbn.is/attach-route: "true"
+              gateway.k8s.rbn.is/attach-route: "true"
     - name: https
       protocol: HTTPS
       port: 443
@@ -37,4 +37,4 @@ spec:
           from: Selector
           selector:
             matchLabels:
-              gateway.infra.rbn.is/attach-route: "true"
+              gateway.k8s.rbn.is/attach-route: "true"

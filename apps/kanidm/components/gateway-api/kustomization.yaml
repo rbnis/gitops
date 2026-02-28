@@ -10,5 +10,5 @@ patches:
       kind: Namespace
     patch: |
       - op: add
-        path: /metadata/labels/gateway.infra.rbn.is~1attach-listener
+        path: /metadata/labels/gateway.k8s.rbn.is~1attach-listener
         value: "true"
