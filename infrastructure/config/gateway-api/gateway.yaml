@@ -8,7 +8,7 @@ kind: Gateway
 metadata:
   name: shared-gateway
 spec:
-  gatewayClassName: cilium
+  gatewayClassName: kgateway
   listeners:
     - name: http
       protocol: HTTP
