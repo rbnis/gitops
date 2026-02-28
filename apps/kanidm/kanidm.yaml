@@ -1,0 +1,29 @@
+apiVersion: kaniop.rs/v1beta1
+kind: Kanidm
+metadata:
+  name: rbnis
+spec:
+  domain: idm.rbn.is
+  tlsSecretName: "idm-rbn-is-tls"
+
+  image: kanidm/server:1.9.1
+  imagePullPolicy: IfNotPresent
+
+  replicaGroups:
+    - name: default
+      replicas: 1
+      resources:
+        requests:
+          cpu: 100m
+          memory: 128Mi
+        limits:
+          memory: 128Mi
+
+  storage:
+    volumeClaimTemplate:
+      spec:
+        accessModes:
+          - ReadWriteOnce
+        resources:
+          requests:
+            storage: 1Gi
