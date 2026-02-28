@@ -13,6 +13,7 @@ spec:
   path: ./infrastructure/config/gateway-api
   components:
     - components/provider/hetzner
+    - components/gatewayclass/kgateway
   postBuild:
     substituteFrom:
       - kind: ConfigMap
