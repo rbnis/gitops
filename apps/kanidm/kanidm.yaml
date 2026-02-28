@@ -9,6 +9,8 @@ spec:
   image: kanidm/server:1.9.1
   imagePullPolicy: IfNotPresent
 
+  ldapPortName: ldaps
+
   replicaGroups:
     - name: default
       replicas: 1

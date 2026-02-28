@@ -1,0 +1,13 @@
+apiVersion: kustomize.config.k8s.io/v1alpha1
+kind: Component
+
+resources:
+  - storageclass.yaml
+
+patches:
+  - target:
+      kind: Kanidm
+    patch: |
+      - op: add
+        path: /spec/storage/volumeClaimTemplate/spec/storageClassName
+        value: kanidm

@@ -8,4 +8,7 @@ spec:
     kind: GitRepository
     name: flux-system
   path: ./apps/kanidm
+  components:
+    - components/gateway-api
+    - components/provider/hetzner
   prune: true

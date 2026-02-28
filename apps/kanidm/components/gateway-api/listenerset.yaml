@@ -1,0 +1,29 @@
+apiVersion: gateway.networking.x-k8s.io/v1alpha1
+kind: XListenerSet
+metadata:
+  name: kanidm
+spec:
+  parentRef:
+    group: gateway.networking.k8s.io
+    kind: Gateway
+    name: shared-gateway
+    namespace: infra
+  listeners:
+    - name: https
+      port: 443
+      protocol: TLS
+      hostname: "idm.rbn.is"
+      tls:
+        mode: Passthrough
+      allowedRoutes:
+        namespaces:
+          from: Same
+    - name: ldaps
+      port: 636
+      protocol: TLS
+      hostname: "idm.rbn.is"
+      tls:
+        mode: Passthrough
+      allowedRoutes:
+        namespaces:
+          from: Same
