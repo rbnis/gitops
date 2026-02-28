@@ -9,6 +9,12 @@ metadata:
   name: shared-gateway
 spec:
   gatewayClassName: default
+  allowedListeners:
+    namespaces:
+      from: Selector
+      selector:
+        matchLabels:
+          gateway.infra.rbn.is/attach-listener: "true"
   listeners:
     - name: http
       protocol: HTTP
@@ -18,7 +24,7 @@ spec:
           from: Selector
           selector:
             matchLabels:
-              shared-gateway-access: "true"
+              gateway.infra.rbn.is/attach-route: "true"
     - name: https
       protocol: HTTPS
       port: 443
@@ -31,4 +37,4 @@ spec:
           from: Selector
           selector:
             matchLabels:
-              shared-gateway-access: "true"
+              gateway.infra.rbn.is/attach-route: "true"

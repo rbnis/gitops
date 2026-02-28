@@ -9,5 +9,5 @@ patches:
       kind: Namespace
     patch: |
       - op: add
-        path: /metadata/labels/shared-gateway-access
+        path: /metadata/labels/gateway.infra.rbn.is~1attach-route
         value: "true"
