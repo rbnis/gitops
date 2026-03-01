@@ -9,6 +9,15 @@ spec:
 apiVersion: source.toolkit.fluxcd.io/v1
 kind: HelmRepository
 metadata:
+  name: grafana-community
+spec:
+  interval: 24h
+  url: oci://ghcr.io/grafana-community/helm-charts
+  type: oci
+---
+apiVersion: source.toolkit.fluxcd.io/v1
+kind: HelmRepository
+metadata:
   name: prometheus-community
 spec:
   interval: 24h

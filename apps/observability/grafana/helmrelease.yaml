@@ -7,36 +7,37 @@ spec:
   chart:
     spec:
       chart: grafana
-      version: 9.3.1
+      version: 11.2.2
       sourceRef:
         kind: HelmRepository
-        name: grafana
+        name: grafana-community
   driftDetection:
     mode: enabled
   values:
     grafana.ini:
       server:
         root_url: https://grafana.rbn.is
-      auth.github:
+      auth.generic_oauth:
         enabled: true
-
-        auth_url: https://github.com/login/oauth/authorize
-        token_url: https://github.com/login/oauth/access_token
-        api_url: https://api.github.com/user
-
-        scopes: user:email,read:org
-        role_attribute_path: "[login=='rbnis'][0] && 'GrafanaAdmin' || 'None'"
-        allow_assign_grafana_admin: true
-
+        name: Kanidm
+        scopes: openid,profile,email,groups
+        auth_url: https://auth.rbn.is/ui/oauth2
+        token_url: https://auth.rbn.is/oauth2/token
+        api_url: https://auth.rbn.is/oauth2/openid/grafana/userinfo
+        use_pkce: true
+        use_refresh_token: true
         allow_sign_up: true
-        auto_login: false
+        allow_assign_grafana_admin: true
+        login_attribute_path: preferred_username
+        groups_attribute_path: groups
+        role_attribute_path: contains(grafana_role[*], 'GrafanaAdmin') && 'GrafanaAdmin' || contains(grafana_role[*], 'Admin') && 'Admin' || contains(grafana_role[*], 'Editor') && 'Editor' || 'Viewer'
 
     envValueFrom:
-      GF_AUTH_GITHUB_CLIENT_ID:
+      GF_AUTH_GENERIC_OAUTH_CLIENT_ID:
         secretKeyRef:
           name: grafana-auth
           key: oauth-client-id
-      GF_AUTH_GITHUB_CLIENT_SECRET:
+      GF_AUTH_GENERIC_OAUTH_CLIENT_SECRET:
         secretKeyRef:
           name: grafana-auth
           key: oauth-client-secret
