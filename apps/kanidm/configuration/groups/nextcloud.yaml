@@ -5,6 +5,5 @@ metadata:
 spec:
   kanidmRef:
     name: rbnis
-
   members:
   - robin
