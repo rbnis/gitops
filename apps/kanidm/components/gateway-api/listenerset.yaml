@@ -12,7 +12,7 @@ spec:
     - name: https
       port: 443
       protocol: TLS
-      hostname: "idm.rbn.is"
+      hostname: "auth.rbn.is"
       tls:
         mode: Passthrough
       allowedRoutes:
@@ -21,7 +21,7 @@ spec:
     - name: ldaps
       port: 636
       protocol: TLS
-      hostname: "idm.rbn.is"
+      hostname: "auth.rbn.is"
       tls:
         mode: Passthrough
       allowedRoutes:

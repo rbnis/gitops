@@ -3,8 +3,8 @@ kind: Kanidm
 metadata:
   name: rbnis
 spec:
-  domain: idm.rbn.is
-  tlsSecretName: "idm-rbn-is-tls"
+  domain: auth.rbn.is
+  tlsSecretName: "auth-rbn-is-tls"
 
   image: kanidm/server:1.9.1
   imagePullPolicy: IfNotPresent
