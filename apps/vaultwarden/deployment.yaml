@@ -28,6 +28,8 @@ spec:
             - configMapRef:
                 name: vaultwarden-config
             - secretRef:
+                name: vaultwarden-sso
+            - secretRef:
                 name: vaultwarden-smtp
           ports:
             - name: http
