@@ -1,23 +1,6 @@
 apiVersion: gateway.networking.k8s.io/v1alpha2
 kind: TLSRoute
 metadata:
-  name: kanidm-ui
-spec:
-  parentRefs:
-    - group: gateway.networking.x-k8s.io
-      kind: XListenerSet
-      name: kanidm
-      sectionName: https
-  hostnames:
-    - "auth.rbn.is"
-  rules:
-    - backendRefs:
-        - name: rbnis
-          port: 8443
----
-apiVersion: gateway.networking.k8s.io/v1alpha2
-kind: TLSRoute
-metadata:
   name: kanidm-ldaps
 spec:
   parentRefs:
@@ -26,7 +9,7 @@ spec:
       name: kanidm
       sectionName: ldaps
   hostnames:
-    - "auth.rbn.is"
+    - auth.rbn.is
   rules:
     - backendRefs:
         - name: rbnis

@@ -2,6 +2,8 @@ apiVersion: kustomize.config.k8s.io/v1alpha1
 kind: Component
 
 resources:
+  - backendtlspolicy.yaml
+  - httproute.yaml
   - listenerset.yaml
   - tlsroute.yaml
 
@@ -9,6 +11,9 @@ patches:
   - target:
       kind: Namespace
     patch: |
+      - op: add
+        path: /metadata/labels/gateway.k8s.rbn.is~1attach-route
+        value: "true"
       - op: add
         path: /metadata/labels/gateway.k8s.rbn.is~1attach-listener
         value: "true"

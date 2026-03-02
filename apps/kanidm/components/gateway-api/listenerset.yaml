@@ -9,19 +9,10 @@ spec:
     name: shared-gateway
     namespace: infra
   listeners:
-    - name: https
-      port: 443
-      protocol: TLS
-      hostname: "auth.rbn.is"
-      tls:
-        mode: Passthrough
-      allowedRoutes:
-        namespaces:
-          from: Same
     - name: ldaps
       port: 636
       protocol: TLS
-      hostname: "auth.rbn.is"
+      hostname: auth.rbn.is
       tls:
         mode: Passthrough
       allowedRoutes:

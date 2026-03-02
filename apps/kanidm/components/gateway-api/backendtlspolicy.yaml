@@ -1,0 +1,12 @@
+apiVersion: gateway.networking.k8s.io/v1
+kind: BackendTLSPolicy
+metadata:
+  name: kanidm-backend-tls
+spec:
+  targetRefs:
+    - group: ""
+      kind: Service
+      name: rbnis
+  validation:
+    hostname: auth.rbn.is
+    wellKnownCACertificates: System
