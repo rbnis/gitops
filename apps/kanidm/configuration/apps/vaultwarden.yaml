@@ -1,0 +1,22 @@
+apiVersion: kaniop.rs/v1beta1
+kind: KanidmOAuth2Client
+metadata:
+  name: vaultwarden
+spec:
+  kanidmRef:
+    name: rbnis
+
+  displayname: Vaultwarden
+  origin: https://pass.rbn.is
+  redirectUrl:
+    - https://pass.rbn.is/identity/connect/oidc-signin
+
+  scopeMap:
+    - group: vaultwarden-access
+      scopes:
+        - openid
+        - profile
+        - email
+        # # Currently the offline_access scope is not supported by kanidm
+        # # See: https://github.com/kanidm/kanidm/issues/4034
+        # - offline_access
