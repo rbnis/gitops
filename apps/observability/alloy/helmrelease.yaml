@@ -76,6 +76,10 @@ spec:
                 source_labels = [ "__meta_kubernetes_pod_name" ]
                 target_label  = "pod"
             }
+            rule {
+              source_labels = ["__meta_kubernetes_pod_container_name"]
+              target_label = "container"
+            }
           }
 
           // Service Monitors
@@ -83,7 +87,39 @@ spec:
             forward_to = [ prometheus.remote_write.default.receiver ]
           }
 
-          //TODO: Pods with scrape label
+          // Prometheus pod annotations
+          discovery.relabel "pods_scrape" {
+            targets = discovery.kubernetes.pods.targets
+
+            rule {
+              source_labels = ["__meta_kubernetes_pod_annotation_prometheus_io_scrape"]
+              action        = "keep"
+              regex         = "true"
+            }
+
+            rule {
+              source_labels = ["__meta_kubernetes_pod_annotation_prometheus_io_path"]
+              action        = "replace"
+              regex         = "(.+)"
+              target_label  = "__metrics_path__"
+            }
+
+            rule {
+              source_labels = ["__address__", "__meta_kubernetes_pod_annotation_prometheus_io_port"]
+              action        = "replace"
+              regex         = "([^:]+)(?::\\d+)?;(\\d+)"
+              replacement   = "$1:$2"
+              target_label  = "__address__"
+            }
+          }
+          prometheus.scrape "pods_annotations" {
+            targets = discovery.relabel.pods_scrape.output
+
+            job_name     = "kubernetes-pods"
+            honor_labels = true
+
+            forward_to = [prometheus.remote_write.default.receiver]
+          }
 
           // kubelet
           discovery.relabel "kubelet" {
