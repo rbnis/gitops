@@ -54,9 +54,9 @@ spec:
     resources:
       requests:
         cpu: 25m
-        memory: 256Mi
+        memory: 384Mi
       limits:
-        memory: 256Mi
+        memory: 384Mi
 
     sidecar:
       datasources:
