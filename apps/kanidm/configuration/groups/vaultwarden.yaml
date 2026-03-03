@@ -6,4 +6,4 @@ spec:
   kanidmRef:
     name: rbnis
   members:
-  - robin
+    - robin

@@ -20,15 +20,15 @@ spec:
         - groups
 
   claimMap:
-  - name: grafana_role
-    joinStrategy: array
-    valuesMap:
-      - group: grafana-superadmins
-        values:
-          - GrafanaAdmin
-      - group: grafana-admins
-        values:
-          - Admin
-      - group: grafana-editors
-        values:
-          - Editor
+    - name: grafana_role
+      joinStrategy: array
+      valuesMap:
+        - group: grafana-superadmins
+          values:
+            - GrafanaAdmin
+        - group: grafana-admins
+          values:
+            - Admin
+        - group: grafana-editors
+          values:
+            - Editor
