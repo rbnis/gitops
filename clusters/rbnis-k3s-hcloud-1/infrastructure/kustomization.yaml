@@ -3,6 +3,7 @@ kind: Kustomization
 
 resources:
   - crds.yaml
+  - rbac.yaml
   - kured.yaml
   - kgateway.yaml
   - gateway-api.yaml
