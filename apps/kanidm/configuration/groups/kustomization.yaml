@@ -3,6 +3,7 @@ kind: Kustomization
 
 resources:
   - linux-server.yaml
+  - kubernetes.yaml
   - grafana.yaml
   - vaultwarden.yaml
   - nextcloud.yaml

@@ -1,0 +1,21 @@
+apiVersion: kaniop.rs/v1beta1
+kind: KanidmOAuth2Client
+metadata:
+  name: kubernetes
+spec:
+  kanidmRef:
+    name: rbnis
+
+  displayname: Kubernetes
+  origin: https://localhost:8000
+  redirectUrl:
+    - https://localhost:8000
+  allowLocalhostRedirect: true
+  public: true
+
+  scopeMap:
+    - group: kubernetes-access
+      scopes:
+        - openid
+        - profile
+        - groups

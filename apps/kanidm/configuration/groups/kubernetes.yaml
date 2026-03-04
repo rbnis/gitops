@@ -1,0 +1,19 @@
+apiVersion: kaniop.rs/v1beta1
+kind: KanidmGroup
+metadata:
+  name: kubernetes-access
+spec:
+  kanidmRef:
+    name: rbnis
+  members:
+    - robin
+---
+apiVersion: kaniop.rs/v1beta1
+kind: KanidmGroup
+metadata:
+  name: kubernetes-admins
+spec:
+  kanidmRef:
+    name: rbnis
+  members:
+    - robin
