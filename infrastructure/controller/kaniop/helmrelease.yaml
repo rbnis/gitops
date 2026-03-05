@@ -10,7 +10,7 @@ spec:
       sourceRef:
         kind: HelmRepository
         name: kaniop
-      version: "0.5.2"
+      version: "0.5.3"
   driftDetection:
     mode: enabled
   install:
