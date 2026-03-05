@@ -43,8 +43,8 @@ spec:
       resources:
         requests:
           cpu: 10m
-          memory: 50Mi
+          memory: 75Mi
         limits:
-          memory: 50Mi
+          memory: 75Mi
     startupapicheck:
       tolerations: []
