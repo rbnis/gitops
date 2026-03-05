@@ -6,7 +6,7 @@
   "rebaseWhen": "conflicted",
   "helm-values": {
     "fileMatch": [
-      ".helmrelease\\.ya?ml$"
+      "helmrelease\\.ya?ml$"
     ]
   },
   "kubernetes": {
@@ -61,8 +61,8 @@
       "addLabels": ["pre-commit"]
     },
     {
-      "matchSourceUrls": ["https://github.com/istio/istio"],
-      "groupName": "istio"
+      "matchPackagePatterns": ["^kgateway"],
+      "groupName": "kgateway"
     }
   ]
 }
