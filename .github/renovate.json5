@@ -15,24 +15,15 @@
       "^infrastructure/.+\\.ya?ml$",
     ],
   },
+  "flux": {
+    "fileMatch": [
+      "^apps/.+\\.ya?ml$",
+      "^infrastructure/.+\\.ya?ml$",
+    ],
+  },
   "pre-commit": {
     "enabled": true
   },
-  "regexManagers": [
-    // regexManager to read and process HelmReleases and CRDs
-    {
-      "fileMatch": [
-        ".helmrelease\\.ya?ml$"
-      ],
-      "matchStrings": [
-        // helm releases
-        "registryUrl=(?<registryUrl>.*?)\n *chart: (?<depName>.*?)\n *version: (?<currentValue>.*)\n",
-        // crds
-        "registryUrl=(?<registryUrl>.*?) chart=(?<depName>.*?)\n.*\\/(?<currentValue>.*?)\\/"
-      ],
-      "datasourceTemplate": "helm"
-    },
-  ],
   "labels": ["renovate"],
   "packageRules": [
     {
