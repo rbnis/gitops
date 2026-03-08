@@ -3,8 +3,8 @@ kind: Kustomization
 
 resources:
   - linux-server.yaml
+  - file-share.yaml
   - kubernetes.yaml
   - grafana.yaml
   - vaultwarden.yaml
   - nextcloud.yaml
-  - jellyfin.yaml

@@ -6,4 +6,3 @@ resources:
   - grafana.yaml
   - vaultwarden.yaml
   - nextcloud.yaml
-  - jellyfin.yaml
