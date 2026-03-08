@@ -1,0 +1,20 @@
+apiVersion: kaniop.rs/v1beta1
+kind: KanidmOAuth2Client
+metadata:
+  name: jellyfin
+spec:
+  kanidmRef:
+    name: rbnis
+
+  displayname: Jellyfin
+  origin: https://jellyfin.home.rbn.is
+  redirectUrl:
+    - https://jellyfin.home.rbn.is/sso/OID/redirect/kanidm
+    - https://jellyfin.home.rbn.is/sso/OID/r/kanidm
+
+  scopeMap:
+    - group: jellyfin-access
+      scopes:
+        - openid
+        - profile
+        - groups

@@ -1,0 +1,19 @@
+apiVersion: kaniop.rs/v1beta1
+kind: KanidmGroup
+metadata:
+  name: jellyfin-access
+spec:
+  kanidmRef:
+    name: rbnis
+  members:
+    - robin
+---
+apiVersion: kaniop.rs/v1beta1
+kind: KanidmGroup
+metadata:
+  name: jellyfin-admins
+spec:
+  kanidmRef:
+    name: rbnis
+  members:
+    - robin
