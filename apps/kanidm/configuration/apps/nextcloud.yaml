@@ -7,6 +7,8 @@ spec:
     name: rbnis
 
   displayname: Nextcloud
+  image:
+    url: https://nextcloud.com/c/uploads/2022/11/logo_nextcloud_blue.svg
   origin: https://files.rbn.is
   redirectUrl:
     - https://files.rbn.is/apps/user_oidc/code

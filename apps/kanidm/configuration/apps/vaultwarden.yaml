@@ -7,6 +7,8 @@ spec:
     name: rbnis
 
   displayname: Vaultwarden
+  image:
+    url: https://www.homedock.cloud/images/app-store-icons/vaultwarden.webp
   origin: https://pass.rbn.is
   redirectUrl:
     - https://pass.rbn.is/identity/connect/oidc-signin

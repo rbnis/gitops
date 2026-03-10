@@ -7,6 +7,8 @@ spec:
     name: rbnis
 
   displayname: Kubernetes
+  image:
+    url: https://raw.githubusercontent.com/kubernetes/kubernetes/refs/heads/master/logo/logo.svg
   origin: https://localhost:8000
   redirectUrl:
     - https://localhost:8000
