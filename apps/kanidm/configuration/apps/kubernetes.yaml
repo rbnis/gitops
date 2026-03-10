@@ -10,6 +10,7 @@ spec:
   origin: https://localhost:8000
   redirectUrl:
     - https://localhost:8000
+    - https://kubenav.io/auth/oidc.html
   allowLocalhostRedirect: true
   public: true
 
