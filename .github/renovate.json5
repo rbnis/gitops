@@ -61,7 +61,7 @@
       "addLabels": ["pre-commit"]
     },
     {
-      "matchPackagePatterns": ["^kgateway"],
+      "matchPackageNames": ["/^kgateway/"],
       "groupName": "kgateway"
     }
   ]
