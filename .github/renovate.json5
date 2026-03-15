@@ -30,7 +30,6 @@
       "matchDatasources": ["helm"],
       "separateMinorPatch": true,
       "ignoreDeprecated": true,
-      "addLabels": ["helm"]
     },
     {
       "matchDatasources": ["docker"],
@@ -38,7 +37,6 @@
       "commitMessageTopic": "container image {{depName}}",
       "commitMessageExtra": "to {{#if isSingleVersion}}v{{{newVersion}}}{{else}}{{{newValue}}}{{/if}}",
       "matchUpdateTypes": ["major", "minor", "patch"],
-      "addLabels": ["docker"]
     },
     {
       "matchUpdateTypes": ["patch"],
@@ -51,14 +49,6 @@
     {
       "matchUpdateTypes": ["major"],
       "addLabels": ["major"]
-    },
-    {
-      "matchManagers": ["flux"],
-      "addLabels": ["flux"]
-    },
-    {
-      "matchManagers": ["pre-commit"],
-      "addLabels": ["pre-commit"]
     },
     {
       "matchPackageNames": ["/^kgateway/"],
