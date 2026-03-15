@@ -51,7 +51,7 @@
       "addLabels": ["major"]
     },
     {
-      "matchPackageNames": ["/^kgateway/"],
+      "matchPackageNames": ["/kgateway/"],
       "groupName": "kgateway",
       "addLabels": ["kgateway"]
     }
