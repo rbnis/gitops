@@ -6,7 +6,7 @@ metadata:
 spec:
   interval: 24h
   ref:
-    tag: v3.0.3
+    tag: v3.0.6
   url: https://github.com/dotdc/grafana-dashboards-kubernetes
 ---
 apiVersion: kustomize.toolkit.fluxcd.io/v1
