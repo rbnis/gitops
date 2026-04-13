@@ -10,7 +10,7 @@ spec:
       sourceRef:
         kind: HelmRepository
         name: kgateway
-      version: "v2.2.2"
+      version: "v2.2.3"
   driftDetection:
     mode: enabled
   install:
@@ -30,7 +30,7 @@ spec:
       sourceRef:
         kind: HelmRepository
         name: kgateway
-      version: "v2.2.2"
+      version: "v2.2.3"
   dependsOn:
     - name: kgateway-crds
   driftDetection:
