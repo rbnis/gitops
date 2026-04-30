@@ -6,7 +6,7 @@ spec:
   domain: auth.rbn.is
   tlsSecretName: auth-rbn-is-tls
 
-  image: kanidm/server:1.9.2
+  image: kanidm/server:1.9.3
   imagePullPolicy: IfNotPresent
 
   ldapPortName: ldaps
