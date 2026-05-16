@@ -1,11 +1,11 @@
-apiVersion: gateway.networking.k8s.io/v1alpha2
+apiVersion: gateway.networking.k8s.io/v1
 kind: TLSRoute
 metadata:
   name: kanidm-ldaps
 spec:
   parentRefs:
-    - group: gateway.networking.x-k8s.io
-      kind: XListenerSet
+    - group: gateway.networking.k8s.io
+      kind: ListenerSet
       name: kanidm
       sectionName: ldaps
   hostnames:
