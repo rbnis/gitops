@@ -5,10 +5,6 @@ metadata:
 spec:
   kube:
     envoyContainer:
-      bootstrap:
-        logFormat:
-          json:
-            message: "%j"
-            level: "%l"
-            scope: "%n"
-            timestamp: "%Y-%m-%dT%T.%eZ"
+      extraArgs:
+        - --log-format
+        - '{"timestamp":"%Y-%m-%dT%T.%eZ","level":"%l","message":"%j","scope":"%n"}'
