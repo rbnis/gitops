@@ -7,4 +7,5 @@ resources:
   - namespace.yaml
   - kanidm.yaml
   - certificate.yaml
+  - smtp.externalsecret.yaml
   - configuration

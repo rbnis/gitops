@@ -29,3 +29,16 @@ spec:
         resources:
           requests:
             storage: 1Gi
+
+  mailSender:
+    relay: smtp://smtp.mailersend.net:587
+    credentialsSecret:
+      name: kanidm-smtp
+    fromAddress: noreply@rbn.is
+
+    resources:
+      requests:
+        cpu: 100m
+        memory: 64Mi
+      limits:
+        memory: 64Mi
