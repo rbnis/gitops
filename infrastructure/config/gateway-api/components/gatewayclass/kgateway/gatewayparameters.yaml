@@ -1,0 +1,14 @@
+apiVersion: gateway.kgateway.dev/v1alpha1
+kind: GatewayParameters
+metadata:
+  name: shared-gateway-logformat
+spec:
+  kube:
+    envoyContainer:
+      bootstrap:
+        logFormat:
+          json:
+            message: "%j"
+            level: "%l"
+            scope: "%n"
+            timestamp: "%Y-%m-%dT%T.%eZ"

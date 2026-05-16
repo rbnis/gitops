@@ -2,6 +2,7 @@ apiVersion: kustomize.config.k8s.io/v1alpha1
 kind: Component
 
 resources:
+  - gatewayparameters.yaml
   - listenerpolicy.yaml
 
 patches:
@@ -11,3 +12,9 @@ patches:
       - op: add
         path: /spec/gatewayClassName
         value: kgateway
+      - op: add
+        path: /spec/infrastructure/parametersRef
+        value:
+          group: gateway.kgateway.dev
+          kind: GatewayParameters
+          name: shared-gateway-logformat
