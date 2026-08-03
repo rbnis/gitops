@@ -1,0 +1,21 @@
+apiVersion: kaniop.rs/v1beta1
+kind: KanidmOAuth2Client
+metadata:
+  name: tailscale
+spec:
+  kanidmRef:
+    name: rbnis
+
+  displayname: Tailscale
+  image:
+    url: https://raw.githubusercontent.com/tailscale/tailscale/refs/heads/main/client/systray/tailscale.svg
+  origin: https://login.tailscale.com
+  redirectUrl:
+    - https://login.tailscale.com/a/oauth_response
+
+  scopeMap:
+    - group: tailscale-access
+      scopes:
+        - openid
+        - email
+        - profile
