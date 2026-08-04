@@ -30,6 +30,21 @@ spec:
           requests:
             storage: 1Gi
 
+  volumes:
+    - name: custom-css
+      configMap:
+        name: kanidm-custom-css
+    - name: custom-images
+      configMap:
+        name: kanidm-custom-images
+  volumeMounts:
+    - name: custom-css
+      mountPath: /hpkg/override.css
+      subPath: override.css
+    - name: custom-images
+      mountPath: /hpkg/background.webp
+      subPath: background.webp
+
   # mailSender:
   #   relay: smtp://smtp.mailersend.net:587
   #   credentialsSecret:

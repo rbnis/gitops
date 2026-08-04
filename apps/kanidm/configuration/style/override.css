@@ -1,0 +1,924 @@
+/*
+ * Kanidm theme approximating Pocket ID's look and feel.
+ *
+ * Pocket ID uses shadcn/ui's "neutral" theme (Tailwind v4). Kanidm's web UI is
+ * Bootstrap 5.3, so this file remaps Bootstrap's CSS variables onto the shadcn
+ * tokens and then patches the components Bootstrap hardcodes.
+ *
+ * Colour tokens are the oklch() values from Pocket ID, converted to sRGB so
+ * they can also be exposed as the "-rgb" triplets Bootstrap needs.
+ *
+ * Loaded via /pkg/override.css, which base.html links after style.css.
+ */
+
+:root,
+[data-bs-theme="light"] {
+  --pid-background: #ffffff;
+  --pid-foreground: #0a0a0a;
+  --pid-card: #ffffff;
+  --pid-card-foreground: #0a0a0a;
+  --pid-primary: #171717;
+  --pid-primary-foreground: #fafafa;
+  --pid-secondary: #f5f5f5;
+  --pid-secondary-foreground: #171717;
+  --pid-muted: #f5f5f5;
+  --pid-muted-foreground: #737373;
+  --pid-accent: #f5f5f5;
+  --pid-accent-foreground: #171717;
+  --pid-destructive: #e7000b;
+  --pid-destructive-foreground: #ffffff;
+  --pid-warning: #fff0c5;
+  --pid-warning-foreground: #492b00;
+  --pid-success: #008a2e;
+  --pid-border: #e5e5e5;
+  --pid-input: #e5e5e5;
+  --pid-ring: #a1a1a1;
+
+  /* rgb triplets for the Bootstrap variables that expect them */
+  --pid-background-rgb: 255, 255, 255;
+  --pid-foreground-rgb: 10, 10, 10;
+  --pid-primary-rgb: 23, 23, 23;
+  --pid-muted-foreground-rgb: 115, 115, 115;
+  --pid-destructive-rgb: 231, 0, 11;
+
+  /* shadcn --radius: 0.625rem, with its -2px / +4px derivatives */
+  --pid-radius-sm: 0.5rem;
+  --pid-radius: 0.625rem;
+  --pid-radius-lg: 0.875rem;
+
+  --pid-shadow-xs: 0 1px 2px 0 rgb(0 0 0 / 0.05);
+  --pid-shadow-sm:
+    0 1px 3px 0 rgb(0 0 0 / 0.1), 0 1px 2px -1px rgb(0 0 0 / 0.1);
+}
+
+[data-bs-theme="dark"] {
+  --pid-background: #0a0a0a;
+  --pid-foreground: #fafafa;
+  --pid-card: #171717;
+  --pid-card-foreground: #fafafa;
+  /* shadcn inverts buttons in dark mode: light surface, dark label */
+  --pid-primary: #e5e5e5;
+  --pid-primary-foreground: #171717;
+  --pid-secondary: #262626;
+  --pid-secondary-foreground: #fafafa;
+  --pid-muted: #262626;
+  --pid-muted-foreground: #a1a1a1;
+  --pid-accent: #262626;
+  --pid-accent-foreground: #fafafa;
+  --pid-destructive: #ff6467;
+  --pid-destructive-foreground: #171717;
+  --pid-warning: #6c4302;
+  --pid-warning-foreground: #f1e7d2;
+  --pid-success: #59f3a6;
+  --pid-border: rgb(255 255 255 / 0.1);
+  --pid-input: rgb(255 255 255 / 0.15);
+  --pid-ring: #737373;
+
+  --pid-background-rgb: 10, 10, 10;
+  --pid-foreground-rgb: 250, 250, 250;
+  --pid-primary-rgb: 229, 229, 229;
+  --pid-muted-foreground-rgb: 161, 161, 161;
+  --pid-destructive-rgb: 255, 100, 103;
+
+  --pid-shadow-xs: 0 1px 2px 0 rgb(0 0 0 / 0.3);
+  --pid-shadow-sm:
+    0 1px 3px 0 rgb(0 0 0 / 0.4), 0 1px 2px -1px rgb(0 0 0 / 0.4);
+}
+
+/* ---------------------------------------------------------------- Bootstrap */
+
+:root,
+[data-bs-theme="light"],
+[data-bs-theme="dark"] {
+  --bs-font-sans-serif:
+    -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue",
+    "Noto Sans", Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji",
+    "Segoe UI Symbol", "Noto Color Emoji";
+  --bs-font-monospace:
+    ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono",
+    "Courier New", monospace;
+  --bs-body-font-family: var(--bs-font-sans-serif);
+  --bs-body-font-size: 0.875rem;
+  --bs-body-line-height: 1.4286;
+
+  --bs-body-bg: var(--pid-background);
+  --bs-body-bg-rgb: var(--pid-background-rgb);
+  --bs-body-color: var(--pid-foreground);
+  --bs-body-color-rgb: var(--pid-foreground-rgb);
+
+  --bs-emphasis-color: var(--pid-foreground);
+  --bs-emphasis-color-rgb: var(--pid-foreground-rgb);
+  --bs-heading-color: var(--pid-foreground);
+
+  --bs-secondary-color: var(--pid-muted-foreground);
+  --bs-secondary-color-rgb: var(--pid-muted-foreground-rgb);
+  --bs-secondary-bg: var(--pid-secondary);
+  --bs-tertiary-color: var(--pid-muted-foreground);
+  --bs-tertiary-color-rgb: var(--pid-muted-foreground-rgb);
+  --bs-tertiary-bg: var(--pid-muted);
+
+  --bs-border-color: var(--pid-border);
+  --bs-border-color-translucent: var(--pid-border);
+  --bs-border-radius: var(--pid-radius);
+  --bs-border-radius-sm: var(--pid-radius-sm);
+  --bs-border-radius-lg: var(--pid-radius-lg);
+  --bs-border-radius-xl: var(--pid-radius-lg);
+
+  --bs-primary: var(--pid-primary);
+  --bs-primary-rgb: var(--pid-primary-rgb);
+  --bs-danger: var(--pid-destructive);
+  --bs-danger-rgb: var(--pid-destructive-rgb);
+
+  --bs-link-color: var(--pid-foreground);
+  --bs-link-color-rgb: var(--pid-foreground-rgb);
+  --bs-link-hover-color: var(--pid-muted-foreground);
+  --bs-link-hover-color-rgb: var(--pid-muted-foreground-rgb);
+  --bs-link-decoration: none;
+  --bs-link-hover-decoration: underline;
+
+  --bs-focus-ring-width: 3px;
+  --bs-focus-ring-color: rgb(var(--pid-foreground-rgb) / 0.2);
+  --bs-box-shadow-sm: var(--pid-shadow-xs);
+  --bs-box-shadow: var(--pid-shadow-sm);
+}
+
+body {
+  background-color: var(--pid-background);
+  color: var(--pid-foreground);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  font-weight: 600;
+  letter-spacing: -0.01em;
+}
+
+h2 {
+  font-size: 1.5rem;
+}
+
+h3 {
+  font-size: 1.25rem;
+}
+
+hr {
+  border-color: var(--pid-border);
+  opacity: 1;
+}
+
+/* ------------------------------------------------------- login / auth card */
+
+/*
+ * login_base.html, recover_base.html and oauth2_consent_request.html all render
+ * <main class="form-signin m-auto">, which becomes the centered card.
+ */
+.form-signin {
+  max-width: 26rem;
+  width: 100%;
+  padding: 2rem;
+  background-color: var(--pid-card);
+  color: var(--pid-card-foreground);
+  border: 1px solid var(--pid-border);
+  border-radius: var(--pid-radius-lg);
+  box-shadow: var(--pid-shadow-sm);
+}
+
+/* Bootstrap's .m-auto only centers horizontally inside the flex column body */
+main.form-signin {
+  margin-top: auto !important;
+  margin-bottom: auto !important;
+}
+
+/* The card is a flex column with align-items-center, so children shrink to fit
+   their content unless stretched explicitly. */
+.form-signin > div,
+.form-signin > form,
+.form-signin > .alert,
+.form-signin form {
+  width: 100%;
+}
+
+.form-signin .container {
+  padding-inline: 0;
+}
+
+/* ------------------------------------------------- split login layout + art */
+
+/*
+ * Pocket ID's login-wrapper switches layout at 1024px: on desktop the form sits
+ * in a fixed-width pane on the left with the artwork filling the remainder
+ * (inset by m-6, rounded-[40px]) and no card around the form; below that the
+ * artwork goes full-bleed behind a centered card.
+ *
+ * Kanidm renders a single <main class="form-signin">, so the artwork panel is a
+ * fixed-position body::before rather than a sibling element.
+ *
+ * background.webp ships in the same ConfigMap-mounted directory and is served
+ * from /pkg (Kanidm exposes /hpkg via ServeDir), so the url() stays same-origin
+ * as its CSP requires ("img-src 'self' data:"). The gradient is kept as a
+ * fallback layer underneath, so a missing or still-loading image degrades to the
+ * old mesh rather than a bare colour.
+ */
+:root {
+  --pid-login-pane: 650px;
+  --pid-login-content: 22rem;
+  --pid-login-photo: url("/pkg/background.webp");
+  --pid-login-mesh:
+    radial-gradient(at 18% 22%, #3f3f46 0px, transparent 55%),
+    radial-gradient(at 82% 12%, #52525b 0px, transparent 50%),
+    radial-gradient(at 72% 78%, #27272a 0px, transparent 55%),
+    radial-gradient(at 25% 88%, #18181b 0px, transparent 50%),
+    linear-gradient(155deg, #262626 0%, #0a0a0a 100%);
+  --pid-login-art: var(--pid-login-photo), var(--pid-login-mesh);
+}
+
+@media (min-width: 1536px) {
+  :root {
+    --pid-login-pane: 800px;
+  }
+}
+
+@media (min-width: 1024px) {
+  body:has(> main.form-signin)::before {
+    content: "";
+    position: fixed;
+    inset: 0 0 0 var(--pid-login-pane);
+    z-index: 0;
+    margin: 1.5rem;
+    border-radius: 40px;
+    background-color: #0a0a0a;
+    background-image: var(--pid-login-art);
+    background-size: cover;
+    background-position: center;
+  }
+
+  /* On desktop the form is bare -- the card treatment is the mobile branch */
+  main.form-signin {
+    max-width: var(--pid-login-pane);
+    padding: 4rem;
+    margin-left: 0 !important;
+    margin-right: auto !important;
+    background-color: transparent;
+    border: 0;
+    border-radius: 0;
+    box-shadow: none;
+  }
+
+  /* Keep the form itself at a readable measure inside the wide pane */
+  .form-signin > * {
+    max-width: var(--pid-login-content);
+  }
+
+  /* Scoped to the card so it beats the unscoped base rule defined further down */
+  .form-signin .kanidm_logo {
+    width: 6rem;
+    height: 6rem;
+  }
+
+  /* Confine the footer to the left pane so it clears the artwork */
+  body:has(> main.form-signin) > .footer {
+    position: relative;
+    z-index: 1;
+    max-width: var(--pid-login-pane);
+    padding-inline: 4rem;
+    border-top: 0;
+    text-align: center !important;
+  }
+
+  body:has(> main.form-signin) > .footer .container {
+    padding-inline: 0;
+  }
+}
+
+/* Below the split, the artwork sits full-bleed behind the centered card */
+@media (max-width: 1023.98px) {
+  /*
+   * A darkening scrim is layered over the photo here: the image is a bright
+   * snowfield, and the footer text below the card sits directly on it with no
+   * card behind it to guarantee contrast.
+   */
+  body:has(> main.form-signin) {
+    background-color: #0a0a0a;
+    background-image:
+      linear-gradient(rgb(0 0 0 / 0.45), rgb(0 0 0 / 0.45)),
+      var(--pid-login-art);
+    background-size: cover;
+    background-position: center;
+    background-attachment: fixed;
+  }
+
+  /* Keep .m-auto centering the card and reserve the gutter in the width, so a
+     narrow viewport shrinks the card instead of overflowing it. */
+  main.form-signin {
+    max-width: min(26rem, 100% - 1.5rem);
+  }
+
+  /* The footer's default tertiary fill would band across the artwork */
+  body:has(> main.form-signin) > .footer {
+    border-top: 0;
+  }
+
+  /* 0.75 rather than a muted grey: over the brightest part of the snowfield the
+     scrim only gets the background to ~0.13 relative luminance, and anything
+     dimmer than this drops the small footer text under 4.5:1. */
+  body:has(> main.form-signin) > .footer .text-muted,
+  body:has(> main.form-signin) > .footer a {
+    color: rgb(255 255 255 / 0.75) !important;
+  }
+}
+
+/*
+ * Kanidm defaults the logo to 12em square, which dwarfs the card.
+ *
+ * Kanidm's crab (logo-square.svg) is full-colour orange on navy, and its artwork
+ * sits inset within a square viewBox, so it reads smaller than its box -- hence
+ * the generous size here. object-fit keeps a non-square custom domain image
+ * (/ui/images/domain) undistorted.
+ *
+ * Nothing here recolours the mark: no filter, opacity or mask, so the crab
+ * renders exactly as shipped in both light and dark themes.
+ */
+.kanidm_logo {
+  width: 4.5rem;
+  height: 4.5rem;
+  max-width: 100%;
+  object-fit: contain;
+  margin-bottom: 1rem;
+}
+
+.form-signin h3 {
+  margin-bottom: 1.5rem;
+  font-size: 1.25rem;
+  text-align: center;
+}
+
+.form-signin .form-label {
+  display: block;
+  width: 100%;
+  margin-bottom: 0.375rem;
+  font-size: 0.875rem;
+  font-weight: 500;
+}
+
+/* Every action in the auth flow is the single full-width button in the card */
+.form-signin .btn,
+.form-signin .input-group > .btn {
+  width: 100%;
+}
+
+.form-signin a:not(.btn) {
+  display: inline-block;
+  width: 100%;
+  text-align: center;
+  font-size: 0.875rem;
+  color: var(--pid-muted-foreground);
+}
+
+.form-signin a:not(.btn):hover {
+  color: var(--pid-foreground);
+}
+
+/* ----------------------------------------------------------------- controls */
+
+.form-control,
+.form-select {
+  padding: 0.4375rem 0.75rem;
+  font-size: 0.875rem;
+  color: var(--pid-foreground);
+  background-color: transparent;
+  border: 1px solid var(--pid-input);
+  border-radius: var(--pid-radius-sm);
+  box-shadow: var(--pid-shadow-xs);
+  transition:
+    border-color 0.15s ease,
+    box-shadow 0.15s ease;
+}
+
+[data-bs-theme="dark"] .form-control,
+[data-bs-theme="dark"] .form-select {
+  background-color: rgb(255 255 255 / 0.03);
+}
+
+.form-control::placeholder {
+  color: var(--pid-muted-foreground);
+  opacity: 1;
+}
+
+/* shadcn focus: 1px ring-coloured border plus a 3px translucent ring */
+.form-control:focus,
+.form-select:focus {
+  color: var(--pid-foreground);
+  background-color: transparent;
+  border-color: var(--pid-ring);
+  box-shadow: 0 0 0 3px rgb(var(--pid-foreground-rgb) / 0.2);
+}
+
+[data-bs-theme="dark"] .form-control:focus,
+[data-bs-theme="dark"] .form-select:focus {
+  background-color: rgb(255 255 255 / 0.03);
+}
+
+.form-control:disabled {
+  background-color: var(--pid-muted);
+  opacity: 0.5;
+}
+
+.form-control.is-invalid,
+.was-validated .form-control:invalid {
+  border-color: var(--pid-destructive);
+}
+
+.form-control.is-invalid:focus,
+.was-validated .form-control:invalid:focus {
+  border-color: var(--pid-destructive);
+  box-shadow: 0 0 0 3px rgb(var(--pid-destructive-rgb) / 0.2);
+}
+
+.invalid-feedback,
+.valid-feedback {
+  font-size: 0.8125rem;
+}
+
+.invalid-feedback {
+  color: var(--pid-destructive);
+}
+
+.form-text {
+  font-size: 0.8125rem;
+  color: var(--pid-muted-foreground);
+}
+
+/* The input-group wrappers Kanidm uses hold a single control, so the group's
+   split border radii would clip the control's corners. */
+.input-group > .form-control,
+.input-group > .form-select,
+.input-group > .btn {
+  border-radius: var(--pid-radius-sm);
+}
+
+/* checkbox / switch */
+
+.form-check-input {
+  border-color: var(--pid-input);
+  background-color: transparent;
+  box-shadow: var(--pid-shadow-xs);
+}
+
+.form-check-input:checked {
+  background-color: var(--pid-primary);
+  border-color: var(--pid-primary);
+}
+
+.form-check-input:focus {
+  border-color: var(--pid-ring);
+  box-shadow: 0 0 0 3px rgb(var(--pid-foreground-rgb) / 0.2);
+}
+
+.form-check-label {
+  font-size: 0.875rem;
+  color: var(--pid-muted-foreground);
+}
+
+.form-switch .form-check-input:checked {
+  /* Bootstrap's switch knob is a hardcoded white SVG; keep it readable against
+     the inverted dark-mode primary. */
+  background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='-4 -4 8 8'%3e%3ccircle r='3' fill='%23fafafa'/%3e%3c/svg%3e");
+}
+
+[data-bs-theme="dark"] .form-switch .form-check-input:checked {
+  background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='-4 -4 8 8'%3e%3ccircle r='3' fill='%23171717'/%3e%3c/svg%3e");
+}
+
+/* ------------------------------------------------------------------ buttons */
+
+.btn {
+  --bs-btn-padding-y: 0.4375rem;
+  --bs-btn-padding-x: 0.875rem;
+  --bs-btn-font-size: 0.875rem;
+  --bs-btn-font-weight: 500;
+  --bs-btn-border-radius: var(--pid-radius-sm);
+  --bs-btn-box-shadow: var(--pid-shadow-xs);
+  --bs-btn-focus-box-shadow: 0 0 0 3px rgb(var(--pid-foreground-rgb) / 0.2);
+  transition:
+    background-color 0.15s ease,
+    border-color 0.15s ease,
+    color 0.15s ease,
+    box-shadow 0.15s ease;
+}
+
+.btn:focus-visible {
+  outline: none;
+  box-shadow: var(--bs-btn-focus-box-shadow);
+}
+
+.btn-lg {
+  --bs-btn-padding-y: 0.5625rem;
+  --bs-btn-padding-x: 1.25rem;
+  --bs-btn-font-size: 0.9375rem;
+  --bs-btn-border-radius: var(--pid-radius-sm);
+}
+
+.btn-sm,
+.btn-tiny {
+  --bs-btn-padding-y: 0.25rem;
+  --bs-btn-padding-x: 0.625rem;
+  --bs-btn-font-size: 0.8125rem;
+  --bs-btn-border-radius: var(--pid-radius-sm);
+}
+
+.btn-primary {
+  --bs-btn-bg: var(--pid-primary);
+  --bs-btn-border-color: var(--pid-primary);
+  --bs-btn-color: var(--pid-primary-foreground);
+  --bs-btn-hover-bg: color-mix(in srgb, var(--pid-primary) 90%, transparent);
+  --bs-btn-hover-border-color: color-mix(
+    in srgb,
+    var(--pid-primary) 90%,
+    transparent
+  );
+  --bs-btn-hover-color: var(--pid-primary-foreground);
+  --bs-btn-active-bg: color-mix(in srgb, var(--pid-primary) 85%, transparent);
+  --bs-btn-active-border-color: color-mix(
+    in srgb,
+    var(--pid-primary) 85%,
+    transparent
+  );
+  --bs-btn-active-color: var(--pid-primary-foreground);
+  --bs-btn-disabled-bg: var(--pid-primary);
+  --bs-btn-disabled-border-color: var(--pid-primary);
+  --bs-btn-disabled-color: var(--pid-primary-foreground);
+  --bs-btn-disabled-opacity: 0.5;
+}
+
+.btn-secondary,
+.btn-light {
+  --bs-btn-bg: var(--pid-secondary);
+  --bs-btn-border-color: var(--pid-secondary);
+  --bs-btn-color: var(--pid-secondary-foreground);
+  --bs-btn-hover-bg: color-mix(
+    in srgb,
+    var(--pid-foreground) 8%,
+    var(--pid-secondary)
+  );
+  --bs-btn-hover-border-color: var(--pid-border);
+  --bs-btn-hover-color: var(--pid-secondary-foreground);
+  --bs-btn-active-bg: var(--pid-accent);
+  --bs-btn-active-border-color: var(--pid-border);
+  --bs-btn-active-color: var(--pid-secondary-foreground);
+}
+
+/* shadcn's "outline" variant */
+.btn-outline-primary,
+.btn-outline-secondary,
+.btn-outline-light,
+.btn-outline-dark {
+  --bs-btn-bg: transparent;
+  --bs-btn-border-color: var(--pid-border);
+  --bs-btn-color: var(--pid-foreground);
+  --bs-btn-hover-bg: var(--pid-accent);
+  --bs-btn-hover-border-color: var(--pid-border);
+  --bs-btn-hover-color: var(--pid-accent-foreground);
+  --bs-btn-active-bg: var(--pid-accent);
+  --bs-btn-active-border-color: var(--pid-border);
+  --bs-btn-active-color: var(--pid-accent-foreground);
+}
+
+.btn-danger {
+  --bs-btn-bg: var(--pid-destructive);
+  --bs-btn-border-color: var(--pid-destructive);
+  --bs-btn-color: var(--pid-destructive-foreground);
+  --bs-btn-hover-bg: color-mix(
+    in srgb,
+    var(--pid-destructive) 90%,
+    transparent
+  );
+  --bs-btn-hover-border-color: color-mix(
+    in srgb,
+    var(--pid-destructive) 90%,
+    transparent
+  );
+  --bs-btn-hover-color: var(--pid-destructive-foreground);
+  --bs-btn-active-bg: color-mix(
+    in srgb,
+    var(--pid-destructive) 85%,
+    transparent
+  );
+  --bs-btn-active-border-color: color-mix(
+    in srgb,
+    var(--pid-destructive) 85%,
+    transparent
+  );
+  --bs-btn-active-color: var(--pid-destructive-foreground);
+}
+
+.btn-outline-danger {
+  --bs-btn-bg: transparent;
+  --bs-btn-border-color: color-mix(
+    in srgb,
+    var(--pid-destructive) 40%,
+    transparent
+  );
+  --bs-btn-color: var(--pid-destructive);
+  --bs-btn-hover-bg: color-mix(
+    in srgb,
+    var(--pid-destructive) 10%,
+    transparent
+  );
+  --bs-btn-hover-border-color: color-mix(
+    in srgb,
+    var(--pid-destructive) 40%,
+    transparent
+  );
+  --bs-btn-hover-color: var(--pid-destructive);
+  --bs-btn-active-bg: color-mix(
+    in srgb,
+    var(--pid-destructive) 15%,
+    transparent
+  );
+  --bs-btn-active-border-color: var(--pid-destructive);
+  --bs-btn-active-color: var(--pid-destructive);
+}
+
+.btn-link {
+  --bs-btn-color: var(--pid-foreground);
+  --bs-btn-hover-color: var(--pid-muted-foreground);
+  --bs-btn-box-shadow: none;
+  text-decoration: none;
+}
+
+.btn-link:hover {
+  text-decoration: underline;
+}
+
+/* -------------------------------------------------------------------- cards */
+
+.card {
+  --bs-card-bg: var(--pid-card);
+  --bs-card-color: var(--pid-card-foreground);
+  --bs-card-border-color: var(--pid-border);
+  --bs-card-border-radius: var(--pid-radius-lg);
+  --bs-card-inner-border-radius: var(--pid-radius);
+  --bs-card-spacer-y: 1.25rem;
+  --bs-card-spacer-x: 1.25rem;
+  --bs-card-cap-bg: transparent;
+  box-shadow: var(--pid-shadow-xs);
+  transition:
+    border-color 0.15s ease,
+    box-shadow 0.15s ease;
+}
+
+/* apps.html renders each linked application as a clickable card */
+.card:has(.stretched-link):hover {
+  border-color: var(--pid-ring);
+  box-shadow: var(--pid-shadow-sm);
+}
+
+.card label {
+  padding: 0 0.75rem 0.875rem;
+  font-size: 0.875rem;
+  font-weight: 500;
+}
+
+.oauth2-img {
+  padding: 1rem 1rem 0.5rem;
+  border-radius: var(--pid-radius);
+}
+
+/* ------------------------------------------------------------------- navbar */
+
+.navbar {
+  --bs-navbar-color: var(--pid-muted-foreground);
+  --bs-navbar-hover-color: var(--pid-foreground);
+  --bs-navbar-active-color: var(--pid-foreground);
+  --bs-navbar-brand-color: var(--pid-foreground);
+  --bs-navbar-brand-hover-color: var(--pid-foreground);
+  --bs-navbar-toggler-border-color: transparent;
+  --bs-navbar-toggler-focus-width: 3px;
+  background-color: var(--pid-background) !important;
+  border-bottom: 1px solid var(--pid-border);
+}
+
+.navbar-brand {
+  font-size: 1rem;
+  font-weight: 600;
+}
+
+.navbar .nav-link {
+  padding: 0.375rem 0.75rem;
+  font-size: 0.875rem;
+  font-weight: 500;
+  border-radius: var(--pid-radius-sm);
+  transition:
+    background-color 0.15s ease,
+    color 0.15s ease;
+}
+
+.navbar .nav-link:hover,
+.navbar .nav-link:focus-visible {
+  background-color: var(--pid-accent);
+  color: var(--pid-accent-foreground);
+}
+
+.navbar-toggler {
+  border: 1px solid var(--pid-border);
+  border-radius: var(--pid-radius-sm);
+}
+
+.navbar-toggle-icon {
+  color: var(--pid-foreground);
+}
+
+.footer {
+  background-color: transparent !important;
+  border-top: 1px solid var(--pid-border);
+  font-size: 0.8125rem;
+}
+
+.footer .text-muted {
+  color: var(--pid-muted-foreground) !important;
+}
+
+.footer a {
+  color: var(--pid-muted-foreground);
+}
+
+.footer a:hover {
+  color: var(--pid-foreground);
+}
+
+/* ----------------------------------------------- profile / settings sidebar */
+
+.side-menu-item {
+  padding: 0.4375rem 0.75rem;
+  font-size: 0.875rem;
+  font-weight: 500;
+  color: var(--pid-muted-foreground);
+  border-radius: var(--pid-radius-sm) !important;
+  transition:
+    background-color 0.15s ease,
+    color 0.15s ease;
+}
+
+.side-menu-item:hover {
+  background-color: var(--pid-accent);
+  color: var(--pid-accent-foreground);
+}
+
+.side-menu-item.active {
+  background-color: var(--pid-accent);
+  color: var(--pid-accent-foreground);
+  font-weight: 600;
+}
+
+/* Kanidm ships monochrome icon SVGs, tinted here to follow the item's state */
+.side-menu-item .icon-container img {
+  opacity: 0.7;
+}
+
+.side-menu-item:hover .icon-container img,
+.side-menu-item.active .icon-container img {
+  opacity: 1;
+}
+
+[data-bs-theme="dark"] .side-menu-item .icon-container img {
+  filter: invert(1);
+}
+
+/* ------------------------------------------------------------------- alerts */
+
+.alert {
+  --bs-alert-border-radius: var(--pid-radius);
+  padding: 0.75rem 1rem;
+  font-size: 0.875rem;
+  border-width: 1px;
+}
+
+.alert-info,
+.alert-primary,
+.alert-secondary {
+  --bs-alert-bg: var(--pid-muted);
+  --bs-alert-border-color: var(--pid-border);
+  --bs-alert-color: var(--pid-foreground);
+}
+
+.alert-warning {
+  --bs-alert-bg: var(--pid-warning);
+  --bs-alert-border-color: color-mix(
+    in srgb,
+    var(--pid-warning-foreground) 25%,
+    var(--pid-warning)
+  );
+  --bs-alert-color: var(--pid-warning-foreground);
+}
+
+.alert-danger {
+  --bs-alert-bg: color-mix(
+    in srgb,
+    var(--pid-destructive) 10%,
+    var(--pid-background)
+  );
+  --bs-alert-border-color: color-mix(
+    in srgb,
+    var(--pid-destructive) 30%,
+    transparent
+  );
+  --bs-alert-color: var(--pid-destructive);
+}
+
+.alert-success {
+  --bs-alert-bg: color-mix(
+    in srgb,
+    var(--pid-success) 10%,
+    var(--pid-background)
+  );
+  --bs-alert-border-color: color-mix(
+    in srgb,
+    var(--pid-success) 30%,
+    transparent
+  );
+  --bs-alert-color: var(--pid-success);
+}
+
+/* ---------------------------------------------------------- modals / badges */
+
+.modal-content {
+  background-color: var(--pid-card);
+  color: var(--pid-card-foreground);
+  border: 1px solid var(--pid-border);
+  border-radius: var(--pid-radius-lg);
+  box-shadow:
+    0 10px 15px -3px rgb(0 0 0 / 0.1),
+    0 4px 6px -4px rgb(0 0 0 / 0.1);
+}
+
+.modal-header,
+.modal-footer {
+  border-color: var(--pid-border);
+}
+
+.modal-title {
+  font-size: 1.125rem;
+  font-weight: 600;
+}
+
+.badge {
+  font-weight: 500;
+  border-radius: calc(var(--pid-radius-sm) - 2px);
+}
+
+.list-group {
+  --bs-list-group-bg: transparent;
+  --bs-list-group-border-color: var(--pid-border);
+  --bs-list-group-border-radius: var(--pid-radius);
+  --bs-list-group-color: var(--pid-foreground);
+  --bs-list-group-action-hover-bg: var(--pid-accent);
+  --bs-list-group-action-hover-color: var(--pid-accent-foreground);
+}
+
+.table {
+  --bs-table-bg: transparent;
+  --bs-table-color: var(--pid-foreground);
+  --bs-table-border-color: var(--pid-border);
+  --bs-table-hover-bg: var(--pid-accent);
+  font-size: 0.875rem;
+}
+
+/* --------------------------------------------- credential reset / TOTP flow */
+
+.form-cred-reset-body {
+  max-width: 32rem;
+}
+
+.totp-display-container {
+  padding: 0.75rem 1rem;
+  gap: 1rem;
+  background-color: var(--pid-muted);
+  border: 1px solid var(--pid-border);
+  border-radius: var(--pid-radius) !important;
+  box-shadow: none !important;
+}
+
+.totp-display {
+  font-family: var(--bs-font-monospace);
+  font-size: 1.75rem;
+  font-weight: 600;
+  letter-spacing: 0.1em;
+}
+
+/* ----------------------------------------------------------------- a11y */
+
+*:focus-visible {
+  outline-color: var(--pid-ring);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  * {
+    transition: none !important;
+  }
+}
