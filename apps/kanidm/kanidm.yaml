@@ -6,6 +6,9 @@ spec:
   domain: auth.rbn.is
   tlsSecretName: auth-rbn-is-tls
 
+  domainAppearance:
+    displayName: auth.rbn.is
+
   image: kanidm/server:1.10.4
   imagePullPolicy: IfNotPresent
 
