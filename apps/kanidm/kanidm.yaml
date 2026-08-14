@@ -9,7 +9,7 @@ spec:
   domainAppearance:
     displayName: auth.rbn.is
 
-  image: kanidm/server:1.10.4
+  image: kanidm/server:1.11.1
   imagePullPolicy: IfNotPresent
 
   ldapPortName: ldaps
