@@ -7,3 +7,4 @@ resources:
   - vaultwarden.yaml
   - nextcloud.yaml
   - tailscale.yaml
+  - homeassistant.yaml

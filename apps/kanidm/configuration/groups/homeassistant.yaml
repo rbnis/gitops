@@ -1,0 +1,19 @@
+apiVersion: kaniop.rs/v1beta1
+kind: KanidmGroup
+metadata:
+  name: homeassistant-access
+spec:
+  kanidmRef:
+    name: rbnis
+  members:
+    - robin
+---
+apiVersion: kaniop.rs/v1beta1
+kind: KanidmGroup
+metadata:
+  name: homeassistant-admins
+spec:
+  kanidmRef:
+    name: rbnis
+  members:
+    - robin

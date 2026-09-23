@@ -1,0 +1,24 @@
+apiVersion: kaniop.rs/v1beta1
+kind: KanidmOAuth2Client
+metadata:
+  name: homeassistant
+spec:
+  kanidmRef:
+    name: rbnis
+
+  displayname: Home Assistant
+  image:
+    url: https://cdn.jsdelivr.net/gh/glincker/thesvg@main/public/icons/home-assistant/default.svg
+  origin: https://assistant.home.rbn.is/auth/oidc/welcome
+  redirectUrl:
+    - https://assistant.home.rbn.is/auth/oidc/callback
+  public: true
+  preferShortUsername: true
+
+  scopeMap:
+    - group: homeassistant-access
+      scopes:
+        - email
+        - groups
+        - openid
+        - profile
