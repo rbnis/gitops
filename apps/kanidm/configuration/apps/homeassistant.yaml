@@ -12,6 +12,7 @@ spec:
   origin: https://assistant.home.rbn.is/auth/oidc/welcome
   redirectUrl:
     - https://assistant.home.rbn.is/auth/oidc/callback
+    - https://music.home.rbn.is/auth/oidc/callback
   public: true
   preferShortUsername: true
 
