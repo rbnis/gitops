@@ -9,10 +9,10 @@ spec:
   displayname: Home Assistant
   image:
     url: https://cdn.jsdelivr.net/gh/glincker/thesvg@main/public/icons/home-assistant/default.svg
-  origin: https://assistant.home.rbn.is/auth/oidc/welcome
+  origin: https://assistant.rbn.is/auth/oidc/welcome
   redirectUrl:
-    - https://assistant.home.rbn.is/auth/oidc/callback
-    - https://music.home.rbn.is/auth/oidc/callback
+    - https://assistant.rbn.is/auth/oidc/callback
+    - https://music.rbn.is/auth/oidc/callback
   public: true
   preferShortUsername: true
 
