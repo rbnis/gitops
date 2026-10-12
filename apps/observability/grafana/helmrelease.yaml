@@ -32,6 +32,10 @@ spec:
         groups_attribute_path: groups
         role_attribute_path: contains(grafana_role[*], 'GrafanaAdmin') && 'GrafanaAdmin' || contains(grafana_role[*], 'Admin') && 'Admin' || contains(grafana_role[*], 'Editor') && 'Editor' || 'Viewer'
 
+    env:
+      # Soft limit for the Go GC, kept below the container limit to leave room for the in-memory storage volume
+      GOMEMLIMIT: 512MiB
+
     envValueFrom:
       GF_AUTH_GENERIC_OAUTH_CLIENT_ID:
         secretKeyRef:
@@ -54,9 +58,9 @@ spec:
     resources:
       requests:
         cpu: 25m
-        memory: 384Mi
+        memory: 768Mi
       limits:
-        memory: 384Mi
+        memory: 768Mi
 
     sidecar:
       datasources:
