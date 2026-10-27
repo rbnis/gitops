@@ -10,4 +10,5 @@ resources:
   - loki
   - grafana
   - kube-state-metrics
+  - blackbox
   - alloy
