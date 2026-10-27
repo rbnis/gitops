@@ -22,6 +22,9 @@ spec:
       create: true
 
     alloy:
+      clustering:
+        enabled: true
+
       configMap:
         create: true
         content: |
@@ -85,6 +88,10 @@ spec:
           // Service Monitors
           prometheus.operator.servicemonitors "services" {
             forward_to = [ prometheus.remote_write.default.receiver ]
+
+            clustering {
+              enabled = true
+            }
           }
 
           // Prometheus pod annotations
@@ -186,6 +193,7 @@ spec:
           ksm.scrape "metrics" {
             targets    = ksm.kubernetes.targets.output
             forward_to = [ prometheus.remote_write.default.receiver ]
+            clustering = true
           }
 
           // Node Exporter
@@ -216,6 +224,10 @@ spec:
           loki.source.kubernetes_events "kubernetes" {
             log_format = "json"
             forward_to = [ loki.write.default.receiver ]
+
+            clustering {
+              enabled = true
+            }
           }
 
       mounts:
