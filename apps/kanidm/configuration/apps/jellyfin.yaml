@@ -1,0 +1,34 @@
+apiVersion: kaniop.rs/v1beta1
+kind: KanidmOAuth2Client
+metadata:
+  name: jellyfin
+spec:
+  kanidmRef:
+    name: rbnis
+
+  displayname: Jellyfin
+  image:
+    url: https://raw.githubusercontent.com/jellyfin/jellyfin-ux/refs/heads/master/logos/SVG/jellyfin-icon--color-on-dark.svg
+  origin: https://media.rbn.is
+  redirectUrl:
+    - https://media.rbn.is/sso/OIDC/Callback/kanidm
+  preferShortUsername: true
+
+  scopeMap:
+    - group: jellyfin-access
+      scopes:
+        - openid
+        - profile
+        - email
+        - groups
+
+  claimMap:
+    - name: jellyfin_role
+      joinStrategy: array
+      valuesMap:
+        - group: jellyfin-admins
+          values:
+            - admin
+        - group: jellyfin-access
+          values:
+            - user
