@@ -11,7 +11,8 @@ spec:
     url: https://raw.githubusercontent.com/jellyfin/jellyfin-ux/refs/heads/master/logos/SVG/jellyfin-icon--color-on-dark.svg
   origin: https://media.rbn.is
   redirectUrl:
-    - https://media.rbn.is/sso/OIDC/Callback/kanidm
+    - https://media.rbn.is/sso/OID/redirect/kanidm
+    - https://media.rbn.is/sso/OID/r/kanidm
   preferShortUsername: true
 
   scopeMap:
